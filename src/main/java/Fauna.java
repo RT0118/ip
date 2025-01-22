@@ -1,25 +1,27 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Fauna {
     private static final String chatbotName = "Fauna";
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static boolean continueChat = true;
 
-    // level-1
-    private static void chatbotEcho() {
-        // loop user chatbot conversation
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            // get user's input
-            String userInput = sc.nextLine();
-            System.out.println("____________________________________________________________");
-
-            if (userInput.equals("bye")) {
-                break;
-            }
-
-            // echo user's input
-            System.out.println(userInput);
-            System.out.println("____________________________________________________________\n");
+    private static void listTasksInTaskList() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.printf("%d. %s\n", i + 1, taskList.get(i));
         }
+    }
+
+    private static void addTaskToTaskList(String taskName) {
+        Task task = new Task(taskName);
+        taskList.add(task);
+        System.out.println("I've added the task: " + taskName);
+    }
+
+    private static String getCommandFromUserInput(String userInput) {
+        return userInput.split(" ", 2)[0];
     }
 
     public static void main(String[] args) {
@@ -33,15 +35,38 @@ public class Fauna {
 
         // greet the user
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm " + chatbotName);
+        System.out.println("Hello hello! I'm " + chatbotName);
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________\n");
 
-        // Level-1 Echo
-        chatbotEcho();
+        // chatbot
+        Scanner sc = new Scanner(System.in);
+        while (continueChat) {
+            // get user's input
+            String userInput = sc.nextLine();
+            System.out.println("____________________________________________________________");
 
-        // exit
-        System.out.println("Bye. Hope to see you again soon!");
+            String command = getCommandFromUserInput(userInput);
+            switch (command) {
+                case "list":
+                    listTasksInTaskList();
+                    break;
+                case "mark":
+                    //markTask(userInput);
+                    break;
+                case "unmark":
+                    //unmarkTask(userInput);
+                    break;
+                case "bye":
+                    continueChat = false;
+                    break;
+                default:
+                    addTaskToTaskList(userInput);
+            }
+        }
+
+        // print exit message
+        System.out.println("Faunwell! Hope to see you again soon!");
         System.out.println("____________________________________________________________");
     }
 }
