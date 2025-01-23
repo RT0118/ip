@@ -1,0 +1,13 @@
+todo read a book
+deadline assignment xyz /by Sunday 2359H
+event ABC's Birthday /at 2025-12-12 1300H
+list
+done 1
+done 2
+done 3
+list
+undone 1
+undone 2
+undone 3
+list
+bye

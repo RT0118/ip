@@ -14,7 +14,7 @@ public class Fauna {
         }
     }
     private static void printAddTaskPrompt(Task task) {
-        System.out.println("Got it. I've added the task: \n\t" + task);
+        System.out.println("Got it. I've added the task:\n\t" + task);
         System.out.printf("Now, you have %d tasks in your list.\n", taskList.size());
     }
 
@@ -39,13 +39,13 @@ public class Fauna {
     private static void markTaskAsDone(int taskIndex) {
         Task modifiedTask = taskList.get(taskIndex).markAsDone();
         taskList.set(taskIndex, modifiedTask);
-        System.out.println("Nice! I've marked this task as done:" + modifiedTask);
+        System.out.println("Nice! I've marked this task as done:\n\t" + modifiedTask);
     }
 
     private static void markTaskAsUndone(int taskIndex) {
         Task modifiedTask = taskList.get(taskIndex).markAsUndone();
         taskList.set(taskIndex, modifiedTask);
-        System.out.println("Okay, I've marked this task as undone:" + modifiedTask);
+        System.out.println("Okay, I've marked this task as undone:\n\t" + modifiedTask);
     }
 
     private static String getCommandFromUserInput(String userInput) {
