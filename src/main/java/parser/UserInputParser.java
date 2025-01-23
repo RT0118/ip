@@ -57,7 +57,7 @@ public class UserInputParser {
         FaunaCommand command = FaunaCommand.fromString(getCommandFromUserInput(userInput));
 
         switch (command) {
-            case DONE, UNDONE, DELETE: {
+            case MARK, UNMARK, DELETE: {
                 int taskIndex = getTaskIndexFromUserInput(userInput);
                 return new ParsedUserInput(command, taskIndex);
             }

@@ -6,8 +6,8 @@ public enum FaunaCommand {
     TODO("Adds a ToDo task to the list"),
     DEADLINE("Adds a deadline task to the list"),
     EVENT("Adds an event to the list"),
-    DONE("Marks a task as done"),
-    UNDONE("Marks a task as undone"),
+    MARK("Marks a task as done"),
+    UNMARK("Marks a task as undone"),
     DELETE("Deletes a task from the list"),
     INVALID("This command does not exist");
 
@@ -24,8 +24,8 @@ public enum FaunaCommand {
             case "todo": return TODO;
             case "deadline": return DEADLINE;
             case "event": return EVENT;
-            case "done": return DONE;
-            case "undone": return UNDONE;
+            case "mark": return MARK;
+            case "unmark": return UNMARK;
             case "delete": return DELETE;
             default: return INVALID;
         }

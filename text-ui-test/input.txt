@@ -3,13 +3,13 @@ todo read a book
 deadline assignment xyz /by Sunday 2359H
 event ABC's Birthday /at 2025-12-12 1300H
 list
-done 1
-done 2
-done 3
+mark 1
+mark 2
+mark 3
 list
-undone 1
-undone 2
-undone 3
+unmark 1
+unmark 2
+unmark 3
 list
 delete 1
 list

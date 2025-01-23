@@ -115,12 +115,12 @@ public class Fauna {
                         listTasksInTaskList();
                         break;
                     }
-                    case DONE: {
+                    case MARK: {
                         int taskIndex = parsedInput.getTaskNumber();
                         markTaskAsDone(taskIndex);
                         break;
                     }
-                    case UNDONE: {
+                    case UNMARK: {
                         int taskIndex = parsedInput.getTaskNumber();
                         markTaskAsUndone(taskIndex);
                         break;
@@ -159,8 +159,8 @@ public class Fauna {
             } catch (InvalidUserInputException | TaskListIndexOutOfBounds exception) {
                 System.out.println(exception.getMessage());
             }
-                System.out.println("____________________________________________________________");
 
+            System.out.println("____________________________________________________________");
         }
 
         // print exit message
