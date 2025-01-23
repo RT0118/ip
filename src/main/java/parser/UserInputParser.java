@@ -37,7 +37,8 @@ public class UserInputParser {
         String taskNameAndDatetime = getTaskNameFromUserInput(userInput);
         String[] splitInput = taskNameAndDatetime.split(delimiter, 2);
         if (splitInput.length < 2 || splitInput[0].isBlank()) {
-            throw new InvalidUserInputException("the task name cannot be empty!");
+            throw new InvalidUserInputException(
+                String.format("the task is missing the %s switch!", delimiter));
         }
         return splitInput[0].trim();
     }
@@ -53,31 +54,29 @@ public class UserInputParser {
     }
 
     public static ParsedUserInput parse(String userInput) throws InvalidUserInputException {
-        String command = getCommandFromUserInput(userInput);
+        FaunaCommand command = FaunaCommand.fromString(getCommandFromUserInput(userInput));
 
         switch (command) {
-            case "list","bye":
-                return new ParsedUserInput(command);
-            case "done","undone","delete": {
+            case DONE, UNDONE, DELETE: {
                 int taskIndex = getTaskIndexFromUserInput(userInput);
                 return new ParsedUserInput(command, taskIndex);
             }
-            case "todo": {
+            case TODO: {
                 String taskName = getTaskNameFromUserInput(userInput);
                 return new ParsedUserInput(command, taskName);
             }
-            case "deadline": {
+            case DEADLINE: {
                 String taskName = getTaskNameFromUserInput(userInput, "/by");
                 String by = getTaskDatetimeFromUserInput(userInput, "/by");
                 return new ParsedUserInput(command, taskName, by);
             }
-            case "event": {
+            case EVENT: {
                 String taskName = getTaskNameFromUserInput(userInput, "/at");
                 String at = getTaskDatetimeFromUserInput(userInput, "/at");
                 return new ParsedUserInput(command, taskName, at);
             }
             default:
-                return new ParsedUserInput("invalid");
+                return new ParsedUserInput(command);
         }
     }
 }

@@ -3,40 +3,40 @@ package parser;
 import java.util.Optional;
 
 public class ParsedUserInput {
-    private final String command;
+    private final FaunaCommand command;
     private final Optional<String> taskName;
     private final Optional<String> taskDatetime;
     private final Optional<Integer> taskNumber;
 
-    public ParsedUserInput(String command) {
+    public ParsedUserInput(FaunaCommand command) {
         this.command = command;
         this.taskName = Optional.empty();
         this.taskDatetime = Optional.empty();
         this.taskNumber = Optional.empty();
     }
 
-    public ParsedUserInput(String command, String taskName) {
+    public ParsedUserInput(FaunaCommand command, String taskName) {
         this.command = command;
         this.taskName = Optional.of(taskName);
         this.taskDatetime = Optional.empty();
         this.taskNumber = Optional.empty();
     }
 
-    public ParsedUserInput(String command, String taskName, String taskDatetime) {
+    public ParsedUserInput(FaunaCommand command, String taskName, String taskDatetime) {
         this.command = command;
         this.taskName = Optional.of(taskName);
         this.taskDatetime = Optional.of(taskDatetime);
         this.taskNumber = Optional.empty();
     }
 
-    public ParsedUserInput(String command, Integer taskNumber) {
+    public ParsedUserInput(FaunaCommand command, Integer taskNumber) {
         this.command = command;
         this.taskName = Optional.empty();
         this.taskDatetime = Optional.empty();
         this.taskNumber = Optional.of(taskNumber);
     }
 
-    public String getCommand() {
+    public FaunaCommand getCommand() {
         return this.command;
     }
 

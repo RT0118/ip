@@ -6,6 +6,9 @@ import parser.UserInputParser;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static parser.FaunaCommand.*;
+
+
 public class Fauna {
     private static final String chatbotName = "Fauna";
     private static ArrayList<Task> taskList = new ArrayList<Task>();
@@ -79,7 +82,7 @@ public class Fauna {
         }
 
         Task deletedTask = taskList.remove(taskIndex);
-        System.out.println("Alright, I've removed the task: \n\t" + deletedTask);
+        System.out.println("Alright, I've removed the task:\n\t" + deletedTask);
         System.out.printf("Now, you have %d tasks in your list.\n", taskList.size());
     }
 
@@ -108,42 +111,42 @@ public class Fauna {
             try {
                 ParsedUserInput parsedInput = UserInputParser.parse(userInput);
                 switch (parsedInput.getCommand()) {
-                    case "list": {
+                    case LIST: {
                         listTasksInTaskList();
                         break;
                     }
-                    case "done": {
+                    case DONE: {
                         int taskIndex = parsedInput.getTaskNumber();
                         markTaskAsDone(taskIndex);
                         break;
                     }
-                    case "undone": {
+                    case UNDONE: {
                         int taskIndex = parsedInput.getTaskNumber();
                         markTaskAsUndone(taskIndex);
                         break;
                     }
-                    case "bye": {
+                    case BYE: {
                         continueChat = false;
                         break;
                     }
-                    case "todo": {
+                    case TODO: {
                         String taskName = parsedInput.getTaskName();
                         addTodoToTaskList(taskName);
                         break;
                     }
-                    case "deadline": {
+                    case DEADLINE: {
                         String taskName = parsedInput.getTaskName();
                         String deadline = parsedInput.getTaskDatetime();
                         addDeadlineToTaskList(taskName, deadline);
                         break;
                     }
-                    case "event": {
+                    case EVENT: {
                         String taskName = parsedInput.getTaskName();
                         String eventTime = parsedInput.getTaskDatetime();
                         addEventToTaskList(taskName, eventTime);
                         break;
                     }
-                    case "delete": {
+                    case DELETE: {
                         int taskIndex = parsedInput.getTaskNumber();
                         deleteTask(taskIndex);
                         break;
@@ -155,9 +158,9 @@ public class Fauna {
                 }
             } catch (InvalidUserInputException | TaskListIndexOutOfBounds exception) {
                 System.out.println(exception.getMessage());
-            } finally {
-                System.out.println("____________________________________________________________");
             }
+                System.out.println("____________________________________________________________");
+
         }
 
         // print exit message

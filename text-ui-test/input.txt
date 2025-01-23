@@ -1,3 +1,4 @@
+list
 todo read a book
 deadline assignment xyz /by Sunday 2359H
 event ABC's Birthday /at 2025-12-12 1300H
@@ -10,4 +11,16 @@ undone 1
 undone 2
 undone 3
 list
+delete 1
+list
+delete 2
+delete 1
+list
+todo
+deadline
+deadline a
+deadline a /by
+deadline /by invalid
+deadline a /at invalid
+deadline a /by date
 bye
