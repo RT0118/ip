@@ -18,7 +18,7 @@ public class Task {
         return new Task(this, true);
     }
 
-    public Task unmarkAsDone() {
+    public Task markAsUndone() {
         return new Task(this, false);
     }
 

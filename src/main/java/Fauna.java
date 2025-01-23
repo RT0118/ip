@@ -24,6 +24,23 @@ public class Fauna {
         return userInput.split(" ", 2)[0];
     }
 
+    private static int getTaskIndexFromUserInput(String userInput) {
+        String taskIndexString = userInput.split(" ", 2)[1];
+        return Integer.parseInt(taskIndexString) - 1;
+    }
+
+    private static void markTaskAsDone(int taskIndex) {
+        Task modifiedTask = taskList.get(taskIndex).markAsDone();
+        taskList.set(taskIndex, modifiedTask);
+        System.out.println("Nice! I've marked this task as done:" + modifiedTask);
+    }
+
+    private static void markTaskAsUndone(int taskIndex) {
+        Task modifiedTask = taskList.get(taskIndex).markAsUndone();
+        taskList.set(taskIndex, modifiedTask);
+        System.out.println("Okay, I've marked this task as undone:" + modifiedTask);
+    }
+
     public static void main(String[] args) {
         String logo = """
              _____ _   _   _ _   _    _    
@@ -51,12 +68,16 @@ public class Fauna {
                 case "list":
                     listTasksInTaskList();
                     break;
-                case "mark":
-                    //markTask(userInput);
+                case "mark": {
+                    int taskNumber = getTaskIndexFromUserInput(userInput);
+                    markTaskAsDone(taskNumber);
                     break;
-                case "unmark":
-                    //unmarkTask(userInput);
+                }
+                case "unmark": {
+                    int taskNumber = getTaskIndexFromUserInput(userInput);
+                    markTaskAsUndone(taskNumber);
                     break;
+                }
                 case "bye":
                     continueChat = false;
                     break;
