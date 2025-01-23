@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private final String taskName;
     private final boolean isDone;
 
@@ -8,24 +8,19 @@ public class Task {
         this.isDone = false;
     }
 
-    private Task(Task task, boolean isDone) {
+    protected Task(Task task, boolean isDone) {
         this.taskName = task.taskName;
         this.isDone = isDone;
     }
 
-    // mark task as done
-    public Task markAsDone() {
-        return new Task(this, true);
-    }
+    public abstract Task markAsDone();
 
-    public Task markAsUndone() {
-        return new Task(this, false);
-    }
+    public abstract Task markAsUndone();
 
     public String toString() {
         return String.format("[%s] %s",
-            this.isDone ? "X" : " ",
-            this.taskName);
+                this.isDone ? "X" : " ",
+                this.taskName);
     }
 
 }
