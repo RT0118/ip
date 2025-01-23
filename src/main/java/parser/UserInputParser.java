@@ -58,7 +58,7 @@ public class UserInputParser {
         switch (command) {
             case "list","bye":
                 return new ParsedUserInput(command);
-            case "done","undone": {
+            case "done","undone","delete": {
                 int taskIndex = getTaskIndexFromUserInput(userInput);
                 return new ParsedUserInput(command, taskIndex);
             }

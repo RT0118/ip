@@ -12,6 +12,11 @@ public class Fauna {
     private static boolean continueChat = true;
 
     private static void listTasksInTaskList() {
+        if (taskList.isEmpty()) {
+            System.out.println("Ooh, you don't have any tasks available!");
+            return;
+        }
+
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, taskList.get(i));
@@ -65,6 +70,17 @@ public class Fauna {
         Task modifiedTask = taskList.get(taskIndex).markAsUndone();
         taskList.set(taskIndex, modifiedTask);
         System.out.println("Okay, I've marked this task as undone:\n\t" + modifiedTask);
+    }
+
+    private static void deleteTask(int taskIndex) {
+        if (taskListIndexInvalid(taskIndex)) {
+            throw new TaskListIndexOutOfBounds(
+                String.format("task %d does not exist!", taskIndex));
+        }
+
+        Task deletedTask = taskList.remove(taskIndex);
+        System.out.println("Alright, I've removed the task: \n\t" + deletedTask);
+        System.out.printf("Now, you have %d tasks in your list.\n", taskList.size());
     }
 
     public static void main(String[] args) {
@@ -127,6 +143,11 @@ public class Fauna {
                         addEventToTaskList(taskName, eventTime);
                         break;
                     }
+                    case "delete": {
+                        int taskIndex = parsedInput.getTaskNumber();
+                        deleteTask(taskIndex);
+                        break;
+                    }
                     default: {
                         System.out.println("Uuuu, I don't know what you mean by that :(");
                         break;
@@ -143,4 +164,5 @@ public class Fauna {
         System.out.println("Faunwell! Hope to see you again soon!");
         System.out.println("____________________________________________________________");
     }
+
 }
