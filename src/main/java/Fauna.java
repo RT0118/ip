@@ -1,6 +1,10 @@
+import exceptions.InvalidUserInputException;
+import exceptions.TaskListIndexOutOfBounds;
+import parser.ParsedUserInput;
+import parser.UserInputParser;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Fauna {
     private static final String chatbotName = "Fauna";
@@ -13,6 +17,7 @@ public class Fauna {
             System.out.printf("%d. %s\n", i + 1, taskList.get(i));
         }
     }
+
     private static void printAddTaskPrompt(Task task) {
         System.out.println("Got it. I've added the task:\n\t" + task);
         System.out.printf("Now, you have %d tasks in your list.\n", taskList.size());
@@ -36,39 +41,30 @@ public class Fauna {
         printAddTaskPrompt(task);
     }
 
+    private static boolean taskListIndexInvalid(int taskIndex) {
+        return taskIndex < 0 || taskIndex >= taskList.size();
+    }
+
     private static void markTaskAsDone(int taskIndex) {
+        if (taskListIndexInvalid(taskIndex)) {
+            throw new TaskListIndexOutOfBounds(
+                String.format("task %d does not exist!", taskIndex));
+        }
+
         Task modifiedTask = taskList.get(taskIndex).markAsDone();
         taskList.set(taskIndex, modifiedTask);
         System.out.println("Nice! I've marked this task as done:\n\t" + modifiedTask);
     }
 
     private static void markTaskAsUndone(int taskIndex) {
+        if (taskListIndexInvalid(taskIndex)) {
+            throw new TaskListIndexOutOfBounds(
+                String.format("task %d does not exist!", taskIndex));
+        }
+
         Task modifiedTask = taskList.get(taskIndex).markAsUndone();
         taskList.set(taskIndex, modifiedTask);
         System.out.println("Okay, I've marked this task as undone:\n\t" + modifiedTask);
-    }
-
-    private static String getCommandFromUserInput(String userInput) {
-        return userInput.split(" ", 2)[0];
-    }
-
-    private static int getTaskIndexFromUserInput(String userInput) {
-        String taskIndexString = userInput.split(" ", 2)[1];
-        return Integer.parseInt(taskIndexString) - 1;
-    }
-
-    private static String getTaskNameFromUserInput(String userInput) {
-        return userInput.split(" ", 2)[1];
-    }
-
-    private static String getTaskNameFromUserInput(String userInput, String delimiter) {
-        String taskNameAndDatetime = getTaskNameFromUserInput(userInput);
-        return taskNameAndDatetime.split(delimiter, 2)[0];
-    }
-
-    private static String getTaskDatetimeFromUserInput(String userInput, String delimiter) {
-        String taskNameAndDatetime = getTaskNameFromUserInput(userInput);
-        return taskNameAndDatetime.split(delimiter, 2)[1];
     }
 
     public static void main(String[] args) {
@@ -93,50 +89,54 @@ public class Fauna {
             String userInput = sc.nextLine();
             System.out.println("____________________________________________________________");
 
-            String command = getCommandFromUserInput(userInput);
-            switch (command) {
-                case "list": {
-                    listTasksInTaskList();
-                    break;
+            try {
+                ParsedUserInput parsedInput = UserInputParser.parse(userInput);
+                switch (parsedInput.getCommand()) {
+                    case "list": {
+                        listTasksInTaskList();
+                        break;
+                    }
+                    case "done": {
+                        int taskIndex = parsedInput.getTaskNumber();
+                        markTaskAsDone(taskIndex);
+                        break;
+                    }
+                    case "undone": {
+                        int taskIndex = parsedInput.getTaskNumber();
+                        markTaskAsUndone(taskIndex);
+                        break;
+                    }
+                    case "bye": {
+                        continueChat = false;
+                        break;
+                    }
+                    case "todo": {
+                        String taskName = parsedInput.getTaskName();
+                        addTodoToTaskList(taskName);
+                        break;
+                    }
+                    case "deadline": {
+                        String taskName = parsedInput.getTaskName();
+                        String deadline = parsedInput.getTaskDatetime();
+                        addDeadlineToTaskList(taskName, deadline);
+                        break;
+                    }
+                    case "event": {
+                        String taskName = parsedInput.getTaskName();
+                        String eventTime = parsedInput.getTaskDatetime();
+                        addEventToTaskList(taskName, eventTime);
+                        break;
+                    }
+                    default: {
+                        System.out.println("Uuuu, I don't know what you mean by that :(");
+                        break;
+                    }
                 }
-                case "done": {
-                    int taskIndex = getTaskIndexFromUserInput(userInput);
-                    markTaskAsDone(taskIndex);
-                    break;
-                }
-                case "undone": {
-                    int taskIndex = getTaskIndexFromUserInput(userInput);
-                    markTaskAsUndone(taskIndex);
-                    break;
-                }
-                case "bye": {
-                    continueChat = false;
-                    break;
-                }
-                case "todo": {
-                    String taskName = getTaskNameFromUserInput(userInput);
-                    addTodoToTaskList(taskName);
-                    break;
-                }
-                case "deadline": {
-                    String taskName = getTaskNameFromUserInput(userInput, "/by");
-                    String deadline = getTaskDatetimeFromUserInput(userInput, "/by");
-                    addDeadlineToTaskList(taskName, deadline);
-                    break;
-                }
-                case "event": {
-                    String taskName = getTaskNameFromUserInput(userInput, "/at");
-                    String eventTime = getTaskDatetimeFromUserInput(userInput, "/at");
-                    addEventToTaskList(taskName, eventTime);
-                    break;
-                }
-                default: {
-                    System.out.println("Unknown command???");
-                    break;
-                }
+            } catch (InvalidUserInputException | TaskListIndexOutOfBounds exception) {
+                System.out.println(exception.getMessage());
+            } finally {
+                System.out.println("____________________________________________________________");
             }
-
-            System.out.println("____________________________________________________________");
         }
 
         // print exit message
