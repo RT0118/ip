@@ -1,9 +1,9 @@
 public class EventTask extends Task {
     private final String at;
 
-    private EventTask(EventTask deadlineTask, Boolean isDone) {
-        super(deadlineTask, isDone);
-        this.at = deadlineTask.at;
+    private EventTask(EventTask eventTask, Boolean isDone) {
+        super(eventTask, isDone);
+        this.at = eventTask.at;
     }
 
     public EventTask(String taskName, String at) {
@@ -20,7 +20,7 @@ public class EventTask extends Task {
     }
 
     public String toString() {
-        return String.format("[D]%s (by: %s)",
+        return String.format("[E]%s (by: %s)",
                 super.toString(), this.at);
     }
 }
