@@ -1,7 +1,7 @@
 list
 todo read a book
 deadline assignment xyz /by Sunday 2359H
-event ABC's Birthday /at 2025-12-12 1300H
+event ABC's Birthday /from 2025-12-12 1300H /to 2025-12-12 2359H
 list
 mark 1
 mark 2
@@ -21,6 +21,8 @@ deadline
 deadline a
 deadline a /by
 deadline /by invalid
-deadline a /at invalid
-deadline a /by date
+event
+event a
+event a /from 123
+event a /to 123
 bye

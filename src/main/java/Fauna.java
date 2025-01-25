@@ -43,8 +43,8 @@ public class Fauna {
         printAddTaskPrompt(task);
     }
 
-    private static void addEventToTaskList(String taskName, String datetime) {
-        Task task = new EventTask(taskName, datetime);
+    private static void addEventToTaskList(String taskName, String from, String to) {
+        Task task = new EventTask(taskName, from, to);
         taskList.add(task);
         printAddTaskPrompt(task);
     }
@@ -109,52 +109,47 @@ public class Fauna {
             System.out.println("____________________________________________________________");
 
             try {
+                int taskIndex;
+                String taskName;
+
                 ParsedUserInput parsedInput = UserInputParser.parse(userInput);
                 switch (parsedInput.getCommand()) {
-                    case LIST: {
-                        listTasksInTaskList();
-                        break;
-                    }
-                    case MARK: {
-                        int taskIndex = parsedInput.getTaskNumber();
-                        markTaskAsDone(taskIndex);
-                        break;
-                    }
-                    case UNMARK: {
-                        int taskIndex = parsedInput.getTaskNumber();
-                        markTaskAsUndone(taskIndex);
-                        break;
-                    }
-                    case BYE: {
-                        continueChat = false;
-                        break;
-                    }
-                    case TODO: {
-                        String taskName = parsedInput.getTaskName();
-                        addTodoToTaskList(taskName);
-                        break;
-                    }
-                    case DEADLINE: {
-                        String taskName = parsedInput.getTaskName();
-                        String deadline = parsedInput.getTaskDatetime();
-                        addDeadlineToTaskList(taskName, deadline);
-                        break;
-                    }
-                    case EVENT: {
-                        String taskName = parsedInput.getTaskName();
-                        String eventTime = parsedInput.getTaskDatetime();
-                        addEventToTaskList(taskName, eventTime);
-                        break;
-                    }
-                    case DELETE: {
-                        int taskIndex = parsedInput.getTaskNumber();
-                        deleteTask(taskIndex);
-                        break;
-                    }
-                    default: {
-                        System.out.println("Uuuu, I don't know what you mean by that :(");
-                        break;
-                    }
+                case LIST:
+                    listTasksInTaskList();
+                    break;
+                case MARK:
+                    taskIndex = parsedInput.getTaskNumber();
+                    markTaskAsDone(taskIndex);
+                    break;
+                case UNMARK:
+                    taskIndex = parsedInput.getTaskNumber();
+                    markTaskAsUndone(taskIndex);
+                    break;
+                case BYE:
+                    continueChat = false;
+                    break;
+                case TODO:
+                    taskName = parsedInput.getTaskName();
+                    addTodoToTaskList(taskName);
+                    break;
+                case DEADLINE:
+                    taskName = parsedInput.getTaskName();
+                    String deadline = parsedInput.getTaskByDatetime();
+                    addDeadlineToTaskList(taskName, deadline);
+                    break;
+                case EVENT:
+                    taskName = parsedInput.getTaskName();
+                    String from = parsedInput.getTaskFromDatetime();
+                    String to = parsedInput.getTaskToDatetime();
+                    addEventToTaskList(taskName, from, to);
+                    break;
+                case DELETE:
+                    taskIndex = parsedInput.getTaskNumber();
+                    deleteTask(taskIndex);
+                    break;
+                default:
+                    System.out.println("Uuuu, I don't know what you mean by that :(");
+                    break;
                 }
             } catch (InvalidUserInputException | TaskListIndexOutOfBounds exception) {
                 System.out.println(exception.getMessage());
