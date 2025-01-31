@@ -1,12 +1,10 @@
 import exceptions.InvalidUserInputException;
+import exceptions.StorageException;
 import exceptions.TaskListIndexOutOfBounds;
 import parser.ParsedUserInput;
 import parser.UserInputParser;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static parser.FaunaCommand.*;
 
 
 public class Fauna {
@@ -88,9 +86,11 @@ public class Fauna {
     }
 
     public static void main(String[] args) {
+        // startup
         Storage storage = new Storage(saveFileLocation);
         taskList = storage.restore();
 
+        // run
         String logo = """
              _____ _   _   _ _   _    _    
             |  ___/ \\ | | | | \\ | |  / \\   
@@ -167,7 +167,11 @@ public class Fauna {
         System.out.println("____________________________________________________________");
 
         // save and cleanup
-
+        try {
+            storage.save(taskList);
+        } catch (StorageException storageException) {
+            System.out.println(storageException.getMessage());
+        }
         sc.close();
     }
 

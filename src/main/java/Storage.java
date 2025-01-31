@@ -1,5 +1,4 @@
 import exceptions.StorageException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,14 +14,21 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> taskList) throws StorageException {
-        try (FileWriter saveFileWriter = new FileWriter(this.saveFileLocation)) {
+        File saveFile = new File(this.saveFileLocation);
+
+        try (FileWriter saveFileWriter = new FileWriter(saveFile)) {
+            if (!saveFile.exists() && !saveFile.createNewFile()) {
+                throw new StorageException(
+                        String.format("the save file cant be created at %s", saveFile.getAbsoluteFile()));
+            }
+
             for(Task task : taskList) {
                 String serializedTaskString = task.serialize();
                 saveFileWriter.write(serializedTaskString);
             }
-        } catch (IOException ioException) {
+        } catch (IOException | SecurityException exception) {
             throw new StorageException(
-                    String.format("the save file in %s can't be written to!", this.saveFileLocation));
+                    String.format("the save file in %s can't be written to!", saveFile.getAbsoluteFile()));
         }
     }
 
@@ -42,7 +48,7 @@ public class Storage {
             }
         } catch (FileNotFoundException fileNotFoundException) {
             throw new StorageException(
-                    String.format("the save file in %s can't be read from!", this.saveFileLocation));
+                    String.format("the save file in %s can't be read from!", saveFile.getAbsoluteFile()));
         }
 
         return taskList;

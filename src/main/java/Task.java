@@ -32,7 +32,7 @@ public abstract class Task {
         String[] splitString = serializedTask.split("\t");
         String taskType = splitString[0];
         String taskName = splitString[1];
-        boolean taskIsDone = splitString[2].equals("TRUE");
+        boolean taskIsDone = splitString[2].equals("true");
         switch(taskType) {
         case "T":
             return new ToDoTask(taskName, taskIsDone);
