@@ -2,10 +2,13 @@ package parser;
 
 import exceptions.InvalidUserInputException;
 
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserInputParser {
+    private static final String DATE_TIME_FORMAT = "\\d{4}-\\d{2}-\\d{2}"; // yyyy-mm-dd
+
     private static String getCommandFromUserInput(String userInput) {
         return userInput.split(" ", 2)[0].toLowerCase();
     }
@@ -45,28 +48,35 @@ public class UserInputParser {
         }
     }
 
-    private static String getByDateFromUserInput(String userInput, String inputPattern) {
+    private static LocalDateTime getByDateFromUserInput(String userInput, String inputPattern) {
         String extracted = regexExtract(userInput, inputPattern, "byDate");
         if (extracted == null || extracted.isBlank()) {
             throw new InvalidUserInputException("the task's /by is missing!");
         }
-        return extracted;
+        return dateTimeFromString(extracted);
     }
 
-    private static String getFromDateFromUserInput(String userInput, String inputPattern) {
+    private static LocalDateTime getFromDateFromUserInput(String userInput, String inputPattern) {
         String extracted = regexExtract(userInput, inputPattern, "fromDate");
         if (extracted == null || extracted.isBlank()) {
             throw new InvalidUserInputException("the task's /from is missing!");
         }
-        return extracted;
+        return dateTimeFromString(extracted);
     }
 
-    private static String getToDateFromUserInput(String userInput, String inputPattern) {
+    private static LocalDateTime getToDateFromUserInput(String userInput, String inputPattern) {
         String extracted = regexExtract(userInput, inputPattern, "toDate");
         if (extracted == null || extracted.isBlank()) {
             throw new InvalidUserInputException("the task's /to is missing!");
         }
-        return extracted;
+        return dateTimeFromString(extracted);
+    }
+
+    private static LocalDateTime dateTimeFromString(String dateTimeString) {
+        if (!dateTimeString.matches(DATE_TIME_FORMAT)) {
+            throw new InvalidUserInputException("the datetime format should be yyyy-mm-dd!");
+        }
+        return LocalDateTime.parse(dateTimeString);
     }
 
 
@@ -85,13 +95,13 @@ public class UserInputParser {
             }
             case DEADLINE: {
                 String taskName = getNameFromUserInput(userInput, inputPattern);
-                String by = getByDateFromUserInput(userInput, inputPattern);
+                LocalDateTime by = getByDateFromUserInput(userInput, inputPattern);
                 return new ParsedUserInput(command, taskName, by);
             }
             case EVENT: {
                 String taskName = getNameFromUserInput(userInput, inputPattern);
-                String from = getFromDateFromUserInput(userInput, inputPattern);
-                String to = getToDateFromUserInput(userInput, inputPattern);
+                LocalDateTime from = getFromDateFromUserInput(userInput, inputPattern);
+                LocalDateTime to = getToDateFromUserInput(userInput, inputPattern);
                 return new ParsedUserInput(command, taskName, from, to);
             }
             default:
