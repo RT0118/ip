@@ -1,4 +1,7 @@
-import exceptions.StorageException;
+package fauna.storage;
+
+import fauna.exceptions.StorageException;
+import fauna.task.Task;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

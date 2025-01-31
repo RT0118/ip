@@ -1,14 +1,14 @@
-package parser;
+package fauna.parser;
 
 public enum FaunaCommand {
     LIST("Lists all tasks"),
     BYE("Exit from the chatbot"),
-    TODO("Adds a ToDo task to the list"),
-    DEADLINE("Adds a deadline task to the list"),
+    TODO("Adds a ToDo fauna.task to the list"),
+    DEADLINE("Adds a deadline fauna.task to the list"),
     EVENT("Adds an event to the list"),
-    MARK("Marks a task as done"),
-    UNMARK("Marks a task as undone"),
-    DELETE("Deletes a task from the list"),
+    MARK("Marks a fauna.task as done"),
+    UNMARK("Marks a fauna.task as undone"),
+    DELETE("Deletes a fauna.task from the list"),
     INVALID("This command does not exist");
 
     private static final String COMMAND = "(?<command>\\w+)";

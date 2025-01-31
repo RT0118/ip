@@ -1,4 +1,4 @@
-package exceptions;
+package fauna.exceptions;
 
 public class FaunaRuntimeException extends RuntimeException {
     public FaunaRuntimeException(String message) {

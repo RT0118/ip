@@ -1,3 +1,5 @@
+package fauna.task;
+
 import java.time.LocalDateTime;
 
 public class EventTask extends Task {
@@ -36,7 +38,8 @@ public class EventTask extends Task {
     }
 
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(),
-                this.from, this.to);
+        return String.format("[E]%s (from: %sH to: %sH)", super.toString(),
+                this.from.format(DATETIME_PRINT_FORMATTER),
+                this.to.format(DATETIME_PRINT_FORMATTER));
     }
 }

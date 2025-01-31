@@ -14,17 +14,17 @@ ____________________________________________________________
 Ooh, you don't have any tasks available!
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added the task:
+Got it. I've added the fauna.task:
 	[T][ ] read a book
 Now, you have 1 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added the task:
+Got it. I've added the fauna.task:
 	[D][ ] assignment xyz (by: Sunday 2359H)
 Now, you have 2 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added the task:
+Got it. I've added the fauna.task:
 	[E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 Now, you have 3 tasks in your list.
 ____________________________________________________________
@@ -35,15 +35,15 @@ Here are the tasks in your list:
 3. [E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this fauna.task as done:
 	[T][X] read a book
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this fauna.task as done:
 	[D][X] assignment xyz (by: Sunday 2359H)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this fauna.task as done:
 	[E][X] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 ____________________________________________________________
 ____________________________________________________________
@@ -53,15 +53,15 @@ Here are the tasks in your list:
 3. [E][X] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 ____________________________________________________________
 ____________________________________________________________
-Okay, I've marked this task as undone:
+Okay, I've marked this fauna.task as undone:
 	[T][ ] read a book
 ____________________________________________________________
 ____________________________________________________________
-Okay, I've marked this task as undone:
+Okay, I've marked this fauna.task as undone:
 	[D][ ] assignment xyz (by: Sunday 2359H)
 ____________________________________________________________
 ____________________________________________________________
-Okay, I've marked this task as undone:
+Okay, I've marked this fauna.task as undone:
 	[E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 ____________________________________________________________
 ____________________________________________________________
@@ -71,7 +71,7 @@ Here are the tasks in your list:
 3. [E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 ____________________________________________________________
 ____________________________________________________________
-Alright, I've removed the task:
+Alright, I've removed the fauna.task:
 	[T][ ] read a book
 Now, you have 2 tasks in your list.
 ____________________________________________________________
@@ -81,12 +81,12 @@ Here are the tasks in your list:
 2. [E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 ____________________________________________________________
 ____________________________________________________________
-Alright, I've removed the task:
+Alright, I've removed the fauna.task:
 	[E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
 Now, you have 1 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
-Alright, I've removed the task:
+Alright, I've removed the fauna.task:
 	[D][ ] assignment xyz (by: Sunday 2359H)
 Now, you have 0 tasks in your list.
 ____________________________________________________________
@@ -94,31 +94,31 @@ ____________________________________________________________
 Ooh, you don't have any tasks available!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's name cannot be empty!
+Uuuu, the fauna.task's name cannot be empty!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's name cannot be empty!
+Uuuu, the fauna.task's name cannot be empty!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's /by is missing!
+Uuuu, the fauna.task's /by is missing!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's /by is missing!
+Uuuu, the fauna.task's /by is missing!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's /by is missing!
+Uuuu, the fauna.task's /by is missing!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's name cannot be empty!
+Uuuu, the fauna.task's name cannot be empty!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's /from is missing!
+Uuuu, the fauna.task's /from is missing!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's /to is missing!
+Uuuu, the fauna.task's /to is missing!
 ____________________________________________________________
 ____________________________________________________________
-Uuuu, the task's /from is missing!
+Uuuu, the fauna.task's /from is missing!
 ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
