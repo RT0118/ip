@@ -1,12 +1,15 @@
-import exceptions.InvalidUserInputException;
-import exceptions.StorageException;
-import jdk.jfr.Event;
+package fauna.task;
+
+import fauna.exceptions.StorageException;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
     private final String taskName;
     private final boolean isDone;
+    protected static final DateTimeFormatter
+            DATETIME_PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
 
     public Task(String taskName) {
         this.taskName = taskName;

@@ -1,4 +1,4 @@
-package parser;
+package fauna.parser;
 
 public enum FaunaCommand {
     LIST("Lists all tasks"),

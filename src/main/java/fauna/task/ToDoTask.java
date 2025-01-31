@@ -1,3 +1,5 @@
+package fauna.task;
+
 public class ToDoTask extends Task{
     public ToDoTask(ToDoTask toDoTask, boolean isDone) {
         super(toDoTask, isDone);

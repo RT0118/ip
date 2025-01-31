@@ -1,17 +1,23 @@
-import exceptions.InvalidUserInputException;
-import exceptions.StorageException;
-import exceptions.TaskListIndexOutOfBounds;
-import parser.ParsedUserInput;
-import parser.UserInputParser;
+package fauna.ui;
 
+import fauna.exceptions.InvalidUserInputException;
+import fauna.exceptions.StorageException;
+import fauna.exceptions.TaskListIndexOutOfBounds;
+import fauna.parser.ParsedUserInput;
+import fauna.parser.UserInputParser;
+import fauna.storage.Storage;
+import fauna.task.Task;
+import fauna.task.ToDoTask;
+import fauna.task.DeadlineTask;
+import fauna.task.EventTask;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Fauna {
-    private static final String chatbotName = "Fauna";
-    private static final String saveFileLocation = "./fauna.txt";
+    private static final String CHATBOT_NAME = "Fauna";
+    private static final String SAVE_FILE_LOCATION = "./fauna.txt";
     private static ArrayList<Task> taskList;
     private static boolean continueChat = true;
 
@@ -89,7 +95,7 @@ public class Fauna {
 
     public static void main(String[] args) {
         // startup
-        Storage storage = new Storage(saveFileLocation);
+        Storage storage = new Storage(SAVE_FILE_LOCATION);
         taskList = storage.restore();
 
         // run
@@ -103,7 +109,7 @@ public class Fauna {
 
         // greet the user
         System.out.println("____________________________________________________________");
-        System.out.println("Hello hello! I'm " + chatbotName);
+        System.out.println("Hello hello! I'm " + CHATBOT_NAME);
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________\n");
 

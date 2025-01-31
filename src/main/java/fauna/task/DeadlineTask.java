@@ -1,5 +1,6 @@
+package fauna.task;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
     private final LocalDateTime by;
@@ -35,6 +36,6 @@ public class DeadlineTask extends Task {
     public String toString() {
         return String.format("[D]%s (by: %sH)",
                 super.toString(),
-                this.by);
+                this.by.format(DATETIME_PRINT_FORMATTER));
     }
 }
