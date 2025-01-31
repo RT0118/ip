@@ -11,7 +11,8 @@ import static parser.FaunaCommand.*;
 
 public class Fauna {
     private static final String chatbotName = "Fauna";
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static final String saveFileLocation = "./data/fauna.txt";
+    private static ArrayList<Task> taskList;
     private static boolean continueChat = true;
 
     private static void listTasksInTaskList() {
@@ -87,6 +88,9 @@ public class Fauna {
     }
 
     public static void main(String[] args) {
+        Storage storage = new Storage(saveFileLocation);
+        taskList = storage.restore();
+
         String logo = """
              _____ _   _   _ _   _    _    
             |  ___/ \\ | | | | \\ | |  / \\   
@@ -161,6 +165,10 @@ public class Fauna {
         // print exit message
         System.out.println("Faunwell! Hope to see you again soon!");
         System.out.println("____________________________________________________________");
+
+        // save and cleanup
+
+        sc.close();
     }
 
 }
