@@ -1,13 +1,14 @@
 package parser;
 
 import exceptions.InvalidUserInputException;
-
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserInputParser {
-    private static final String DATE_TIME_FORMAT = "\\d{4}-\\d{2}-\\d{2}"; // yyyy-mm-dd
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     private static String getCommandFromUserInput(String userInput) {
         return userInput.split(" ", 2)[0].toLowerCase();
@@ -72,11 +73,20 @@ public class UserInputParser {
         return dateTimeFromString(extracted);
     }
 
-    private static LocalDateTime dateTimeFromString(String dateTimeString) {
-        if (!dateTimeString.matches(DATE_TIME_FORMAT)) {
-            throw new InvalidUserInputException("the datetime format should be yyyy-mm-dd!");
+    private static boolean isDatetimeFromUserInputValid(String dateTimeString) {
+        try {
+            DATETIME_FORMATTER.parse(dateTimeString);
+        } catch (DateTimeParseException dateTimeParseException) {
+            return false;
         }
-        return LocalDateTime.parse(dateTimeString);
+        return true;
+    }
+
+    private static LocalDateTime dateTimeFromString(String dateTimeString) {
+        if (!isDatetimeFromUserInputValid(dateTimeString)) {
+            throw new InvalidUserInputException("your date format is invalid! It should be yyyy-MM-dd HHmm.");
+        }
+        return LocalDateTime.parse(dateTimeString, DATETIME_FORMATTER);
     }
 
 
