@@ -1,17 +1,16 @@
 import exceptions.InvalidUserInputException;
+import exceptions.StorageException;
 import exceptions.TaskListIndexOutOfBounds;
 import parser.ParsedUserInput;
 import parser.UserInputParser;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static parser.FaunaCommand.*;
 
 
 public class Fauna {
     private static final String chatbotName = "Fauna";
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static final String saveFileLocation = "./fauna.txt";
+    private static ArrayList<Task> taskList;
     private static boolean continueChat = true;
 
     private static void listTasksInTaskList() {
@@ -87,6 +86,11 @@ public class Fauna {
     }
 
     public static void main(String[] args) {
+        // startup
+        Storage storage = new Storage(saveFileLocation);
+        taskList = storage.restore();
+
+        // run
         String logo = """
              _____ _   _   _ _   _    _    
             |  ___/ \\ | | | | \\ | |  / \\   
@@ -161,6 +165,14 @@ public class Fauna {
         // print exit message
         System.out.println("Faunwell! Hope to see you again soon!");
         System.out.println("____________________________________________________________");
+
+        // save and cleanup
+        try {
+            storage.save(taskList);
+        } catch (StorageException storageException) {
+            System.out.println(storageException.getMessage());
+        }
+        sc.close();
     }
 
 }

@@ -1,9 +1,14 @@
 public class DeadlineTask extends Task {
     private final String by;
 
-    private DeadlineTask(DeadlineTask deadlineTask, Boolean isDone) {
+    private DeadlineTask(DeadlineTask deadlineTask, boolean isDone) {
         super(deadlineTask, isDone);
         this.by = deadlineTask.by;
+    }
+
+    public DeadlineTask(String taskName, boolean isDone, String by) {
+        super(taskName, isDone);
+        this.by = by;
     }
 
     public DeadlineTask(String taskName, String by) {
@@ -17,6 +22,11 @@ public class DeadlineTask extends Task {
 
     public Task markAsUndone() {
         return new DeadlineTask(this, false);
+    }
+
+    @Override
+    public String serialize() {
+        return String.format("T\t%s\t%s\n", super.serialize(), this.by);
     }
 
     public String toString() {
