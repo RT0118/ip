@@ -3,6 +3,8 @@ import exceptions.StorageException;
 import exceptions.TaskListIndexOutOfBounds;
 import parser.ParsedUserInput;
 import parser.UserInputParser;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,13 +38,13 @@ public class Fauna {
         printAddTaskPrompt(task);
     }
 
-    private static void addDeadlineToTaskList(String taskName, String datetime) {
+    private static void addDeadlineToTaskList(String taskName, LocalDateTime datetime) {
         Task task = new DeadlineTask(taskName, datetime);
         taskList.add(task);
         printAddTaskPrompt(task);
     }
 
-    private static void addEventToTaskList(String taskName, String from, String to) {
+    private static void addEventToTaskList(String taskName, LocalDateTime from, LocalDateTime to) {
         Task task = new EventTask(taskName, from, to);
         taskList.add(task);
         printAddTaskPrompt(task);
@@ -138,13 +140,13 @@ public class Fauna {
                     break;
                 case DEADLINE:
                     taskName = parsedInput.getTaskName();
-                    String deadline = parsedInput.getTaskByDatetime();
+                    LocalDateTime deadline = parsedInput.getTaskByDatetime();
                     addDeadlineToTaskList(taskName, deadline);
                     break;
                 case EVENT:
                     taskName = parsedInput.getTaskName();
-                    String from = parsedInput.getTaskFromDatetime();
-                    String to = parsedInput.getTaskToDatetime();
+                    LocalDateTime from = parsedInput.getTaskFromDatetime();
+                    LocalDateTime to = parsedInput.getTaskToDatetime();
                     addEventToTaskList(taskName, from, to);
                     break;
                 case DELETE:

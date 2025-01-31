@@ -1,13 +1,17 @@
 package parser;
 
+import exceptions.InvalidUserInputException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class ParsedUserInput {
     private final FaunaCommand command;
     private final Optional<String> taskName;
-    private final Optional<String> taskByDatetime;
-    private final Optional<String> taskFromDatetime;
-    private final Optional<String> taskToDatetime;
+    private final Optional<LocalDateTime> taskByDatetime;
+    private final Optional<LocalDateTime> taskFromDatetime;
+    private final Optional<LocalDateTime> taskToDatetime;
     private final Optional<Integer> taskNumber;
 
     public ParsedUserInput(FaunaCommand command) {
@@ -28,7 +32,7 @@ public class ParsedUserInput {
         this.taskNumber = Optional.empty();
     }
 
-    public ParsedUserInput(FaunaCommand command, String taskName, String byDatetime) {
+    public ParsedUserInput(FaunaCommand command, String taskName, LocalDateTime byDatetime) {
         this.command = command;
         this.taskName = Optional.of(taskName);
         this.taskByDatetime = Optional.of(byDatetime);
@@ -37,7 +41,7 @@ public class ParsedUserInput {
         this.taskNumber = Optional.empty();
     }
 
-    public ParsedUserInput(FaunaCommand command, String taskName, String fromDatetime, String toDatetime) {
+    public ParsedUserInput(FaunaCommand command, String taskName, LocalDateTime fromDatetime, LocalDateTime toDatetime) {
         this.command = command;
         this.taskName = Optional.of(taskName);
         this.taskByDatetime = Optional.empty();
@@ -63,16 +67,19 @@ public class ParsedUserInput {
         return this.taskName.orElse("Invalid name");
     }
 
-    public String getTaskByDatetime() {
-        return this.taskByDatetime.orElse("Invalid datetime");
+    public LocalDateTime getTaskByDatetime() {
+        return this.taskByDatetime
+                .orElseThrow(() -> new InvalidUserInputException("By date missing?"));
     }
 
-    public String getTaskFromDatetime() {
-        return this.taskFromDatetime.orElse("Invalid datetime");
+    public LocalDateTime getTaskFromDatetime() {
+        return this.taskFromDatetime
+                .orElseThrow(() -> new InvalidUserInputException("From date missing?"));
     }
 
-    public String getTaskToDatetime() {
-        return this.taskToDatetime.orElse("Invalid datetime");
+    public LocalDateTime getTaskToDatetime() {
+        return this.taskToDatetime
+                .orElseThrow(() -> new InvalidUserInputException("To date missing?"));
     }
 
     public Integer getTaskNumber() {

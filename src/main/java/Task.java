@@ -2,6 +2,8 @@ import exceptions.InvalidUserInputException;
 import exceptions.StorageException;
 import jdk.jfr.Event;
 
+import java.time.LocalDateTime;
+
 public abstract class Task {
     private final String taskName;
     private final boolean isDone;
@@ -37,11 +39,11 @@ public abstract class Task {
         case "T":
             return new ToDoTask(taskName, taskIsDone);
         case "D":
-            String by = splitString[3];
+            LocalDateTime by = LocalDateTime.parse(splitString[3]);
             return new DeadlineTask(taskName, taskIsDone, by);
         case "E":
-            String from = splitString[3];
-            String to = splitString[4];
+            LocalDateTime from = LocalDateTime.parse(splitString[3]);
+            LocalDateTime to = LocalDateTime.parse(splitString[4]);
             return new EventTask(taskName, taskIsDone, from, to);
         default:
             throw new StorageException("the task string is invalid!");
