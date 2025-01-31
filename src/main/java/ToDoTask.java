@@ -1,11 +1,16 @@
 public class ToDoTask extends Task{
-    private ToDoTask(ToDoTask toDoTask, Boolean isDone) {
+    public ToDoTask(ToDoTask toDoTask, boolean isDone) {
         super(toDoTask, isDone);
+    }
+
+    public ToDoTask(String taskName, boolean isDone) {
+        super(taskName, isDone);
     }
 
     public ToDoTask(String taskName) {
         super(taskName);
     }
+
 
     public Task markAsDone() {
         return new ToDoTask(this, true);
@@ -13,6 +18,11 @@ public class ToDoTask extends Task{
 
     public Task markAsUndone() {
         return new ToDoTask(this, false);
+    }
+
+    @Override
+    public String serialize() {
+        return String.format("T\t%s\n", super.serialize());
     }
 
     public String toString() {
