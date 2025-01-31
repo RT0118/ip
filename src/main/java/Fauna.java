@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Fauna {
     private static final String chatbotName = "Fauna";
-    private static final String saveFileLocation = "./data/fauna.txt";
+    private static final String saveFileLocation = "./fauna.txt";
     private static ArrayList<Task> taskList;
     private static boolean continueChat = true;
 
