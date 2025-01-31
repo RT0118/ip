@@ -1,17 +1,20 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
-    private final String by;
+    private final LocalDateTime by;
 
     private DeadlineTask(DeadlineTask deadlineTask, boolean isDone) {
         super(deadlineTask, isDone);
         this.by = deadlineTask.by;
     }
 
-    public DeadlineTask(String taskName, boolean isDone, String by) {
+    public DeadlineTask(String taskName, boolean isDone, LocalDateTime by) {
         super(taskName, isDone);
         this.by = by;
     }
 
-    public DeadlineTask(String taskName, String by) {
+    public DeadlineTask(String taskName, LocalDateTime by) {
         super(taskName);
         this.by = by;
     }
@@ -26,11 +29,12 @@ public class DeadlineTask extends Task {
 
     @Override
     public String serialize() {
-        return String.format("T\t%s\t%s\n", super.serialize(), this.by);
+        return String.format("D\t%s\t%s\n", super.serialize(), this.by);
     }
 
     public String toString() {
-        return String.format("[D]%s (by: %s)",
-                super.toString(), this.by);
+        return String.format("[D]%s (by: %sH)",
+                super.toString(),
+                this.by);
     }
 }
