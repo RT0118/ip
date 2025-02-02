@@ -13,113 +13,81 @@ ____________________________________________________________
 ____________________________________________________________
 Ooh, you don't have any tasks available!
 ____________________________________________________________
-____________________________________________________________
-Got it. I've added the fauna.task:
-	[T][ ] read a book
+Got it. I've added the task:
+	[T][ ] todoTask
 Now, you have 1 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added the fauna.task:
-	[D][ ] assignment xyz (by: Sunday 2359H)
+Got it. I've added the task:
+	[D][ ] dlTask (by: Dec 12 2022, 2359H)
 Now, you have 2 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added the fauna.task:
-	[E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
+Got it. I've added the task:
+	[E][ ] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
 Now, you have 3 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [T][ ] read a book
-2. [D][ ] assignment xyz (by: Sunday 2359H)
-3. [E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
+1. [T][ ] todoTask
+2. [D][ ] dlTask (by: Dec 12 2022, 2359H)
+3. [E][ ] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
+
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this fauna.task as done:
-	[T][X] read a book
+Nice! I've marked this task as done:
+	[T][X] todoTask
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this fauna.task as done:
-	[D][X] assignment xyz (by: Sunday 2359H)
-____________________________________________________________
-____________________________________________________________
-Nice! I've marked this fauna.task as done:
-	[E][X] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
+Nice! I've marked this task as done:
+	[E][X] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [T][X] read a book
-2. [D][X] assignment xyz (by: Sunday 2359H)
-3. [E][X] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
+1. [T][X] todoTask
+2. [D][ ] dlTask (by: Dec 12 2022, 2359H)
+3. [E][X] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
+
 ____________________________________________________________
 ____________________________________________________________
-Okay, I've marked this fauna.task as undone:
-	[T][ ] read a book
+Okay, I've marked this task as undone:
+	[D][ ] dlTask (by: Dec 12 2022, 2359H)
 ____________________________________________________________
 ____________________________________________________________
-Okay, I've marked this fauna.task as undone:
-	[D][ ] assignment xyz (by: Sunday 2359H)
-____________________________________________________________
-____________________________________________________________
-Okay, I've marked this fauna.task as undone:
-	[E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
+Okay, I've marked this task as undone:
+	[E][ ] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [T][ ] read a book
-2. [D][ ] assignment xyz (by: Sunday 2359H)
-3. [E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
+1. [T][X] todoTask
+2. [D][ ] dlTask (by: Dec 12 2022, 2359H)
+3. [E][ ] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
+
 ____________________________________________________________
 ____________________________________________________________
-Alright, I've removed the fauna.task:
-	[T][ ] read a book
-Now, you have 2 tasks in your list.
+Got it. I've added the task:
+	[T][ ] deleteMe
+Now, you have 4 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][ ] assignment xyz (by: Sunday 2359H)
-2. [E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
+1. [T][X] todoTask
+2. [D][ ] dlTask (by: Dec 12 2022, 2359H)
+3. [E][ ] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
+4. [T][ ] deleteMe
+
 ____________________________________________________________
 ____________________________________________________________
-Alright, I've removed the fauna.task:
-	[E][ ] ABC's Birthday (from: 2025-12-12 1300H to: 2025-12-12 2359H)
-Now, you have 1 tasks in your list.
+Alright, I've removed the task:
+	[T][ ] deleteMe
+Now, you have 3 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
-Alright, I've removed the fauna.task:
-	[D][ ] assignment xyz (by: Sunday 2359H)
-Now, you have 0 tasks in your list.
-____________________________________________________________
-____________________________________________________________
-Ooh, you don't have any tasks available!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's name cannot be empty!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's name cannot be empty!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's /by is missing!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's /by is missing!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's /by is missing!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's name cannot be empty!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's /from is missing!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's /to is missing!
-____________________________________________________________
-____________________________________________________________
-Uuuu, the fauna.task's /from is missing!
-____________________________________________________________
+Here are the tasks in your list:
+1. [T][X] todoTask
+2. [D][ ] dlTask (by: Dec 12 2022, 2359H)
+3. [E][ ] eTask (from: Nov 11 2024, 0000H to: Dec 12 2024, 1234H)
+
 ____________________________________________________________
 ____________________________________________________________
 Faunwell! Hope to see you again soon!

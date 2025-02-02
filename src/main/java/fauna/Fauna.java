@@ -1,3 +1,5 @@
+package fauna;
+
 import fauna.parser.ParsedUserInput;
 import fauna.parser.UserInputParser;
 import fauna.storage.Storage;
