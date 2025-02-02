@@ -3,7 +3,6 @@ package fauna.ui;
 import fauna.task.Task;
 import fauna.task.TaskList;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {

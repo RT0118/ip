@@ -1,15 +1,14 @@
 package fauna.storage;
 
-import fauna.exceptions.StorageException;
 import fauna.task.Task;
 import fauna.task.TaskList;
+import fauna.exceptions.StorageException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Storage {
     private final String saveFileLocation;

@@ -1,16 +1,17 @@
-package fauna;
-
-import fauna.exceptions.InvalidUserInputException;
-import fauna.exceptions.StorageException;
-import fauna.exceptions.TaskListException;
 import fauna.parser.ParsedUserInput;
 import fauna.parser.UserInputParser;
 import fauna.storage.Storage;
-import fauna.task.*;
+import fauna.task.ToDoTask;
+import fauna.task.DeadlineTask;
+import fauna.task.EventTask;
+import fauna.task.TaskList;
+import fauna.task.Task;
 import fauna.ui.Ui;
+import fauna.exceptions.InvalidUserInputException;
+import fauna.exceptions.StorageException;
+import fauna.exceptions.TaskListException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 public class Fauna {
