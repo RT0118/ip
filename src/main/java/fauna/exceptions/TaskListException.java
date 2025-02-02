@@ -1,7 +1,7 @@
 package fauna.exceptions;
 
-public class TaskListIndexOutOfBounds extends FaunaRuntimeException {
-    public TaskListIndexOutOfBounds(String message) {
+public class TaskListException extends FaunaRuntimeException {
+    public TaskListException(String message) {
         super(message);
     }
 }

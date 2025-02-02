@@ -2,6 +2,8 @@ package fauna.storage;
 
 import fauna.exceptions.StorageException;
 import fauna.task.Task;
+import fauna.task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,7 +18,7 @@ public class Storage {
         this.saveFileLocation = saveFileLocation;
     }
 
-    public void save(ArrayList<Task> taskList) throws StorageException {
+    public void save(TaskList taskList) throws StorageException {
         File saveFile = new File(this.saveFileLocation);
 
         try (FileWriter saveFileWriter = new FileWriter(saveFile)) {
@@ -25,7 +27,7 @@ public class Storage {
                         String.format("the save file cant be created at %s", saveFile.getAbsoluteFile()));
             }
 
-            for(Task task : taskList) {
+            for (Task task : taskList.getTasksAsList()) {
                 String serializedTaskString = task.serialize();
                 saveFileWriter.write(serializedTaskString);
             }
@@ -35,8 +37,8 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> restore() throws StorageException {
-        ArrayList<Task> taskList = new ArrayList<Task>();
+    public TaskList restore() throws StorageException {
+        TaskList taskList = new TaskList();
         File saveFile = new File(this.saveFileLocation);
 
         if (!saveFile.exists()) {
@@ -47,7 +49,7 @@ public class Storage {
             while (saveFileScanner.hasNextLine()) {
                 String line = saveFileScanner.nextLine();
                 Task task = Task.fromSerializedString(line);
-                taskList.add(task);
+                taskList = taskList.addTask(task);
             }
         } catch (FileNotFoundException fileNotFoundException) {
             throw new StorageException(
