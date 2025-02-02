@@ -38,7 +38,7 @@ public class UserInputParser {
         }
 
         try {
-            int taskIndexInteger = Integer.parseInt(extracted) - 1;
+            int taskIndexInteger = Integer.parseInt(extracted);
             if (taskIndexInteger < 0) {
                 throw new InvalidUserInputException("the task number provided cannot be less than 1!");
             }
