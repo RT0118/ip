@@ -1,5 +1,10 @@
 package fauna.parser;
 
+/**
+ * FaunaCommand stores all available commands,
+ * command descriptions and command regex for
+ * extracting variables from user input
+ */
 public enum FaunaCommand {
     LIST("Lists all tasks"),
     BYE("Exit from the chatbot"),
@@ -23,6 +28,12 @@ public enum FaunaCommand {
         this.description = description;
     }
 
+    /**
+     * <p>Gets command as string, converting it to a FaunaCommand
+     * </p>
+     * @param commandString string representation of the command
+     * @return a FaunaCommand that represents the commandString
+     */
     public static FaunaCommand fromString(String commandString) {
         switch (commandString) {
             case "list": return LIST;
@@ -41,6 +52,12 @@ public enum FaunaCommand {
         return this.description;
     }
 
+    /**
+     * <p>Provides a regex pattern string with matching groups
+     * to extract information from user input
+     * </p>
+     * @return regex pattern string
+     */
     public String getCommandRegexPattern() {
         switch (this) {
         case LIST,BYE:
