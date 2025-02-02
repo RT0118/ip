@@ -10,13 +10,27 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Storage class to save and restore tasks saved by the user
+ * @author RT0118
+ */
 public class Storage {
+    /**
+     * The path pointing to the save file
+     */
     private final String saveFileLocation;
 
     public Storage(String saveFileLocation) {
         this.saveFileLocation = saveFileLocation;
     }
 
+    /**
+     * <p>saves the tasks created by the user in a txt file
+     * with the path provided on creation
+     * </p>
+     * @param taskList TaskList that contains stored tasks
+     * @throws StorageException the save file cannot be created/written to
+     */
     public void save(TaskList taskList) throws StorageException {
         File saveFile = new File(this.saveFileLocation);
 
@@ -36,6 +50,12 @@ public class Storage {
         }
     }
 
+    /**
+     * <p>Restores the tasks saved from the save file
+     * </p>
+     * @return TaskList object containing all tasks saved
+     * @throws StorageException the save file cannot be read from
+     */
     public TaskList restore() throws StorageException {
         TaskList taskList = new TaskList();
         File saveFile = new File(this.saveFileLocation);

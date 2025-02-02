@@ -8,6 +8,11 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/**
+ * UserInputParser handles parsing of raw user input with error checking
+ * @author RT0118
+ */
 public class UserInputParser {
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
@@ -90,7 +95,16 @@ public class UserInputParser {
         return LocalDateTime.parse(dateTimeString, DATETIME_FORMATTER);
     }
 
-
+    /**
+     * <p>parse method will take in user input and
+     * extract the command and task information and
+     * returns a ParsedUserInput that contains
+     * the task information.
+     * </p>
+     * @param userInput raw user input
+     * @return ParsedUserInput object that contains user provided information
+     * @throws InvalidUserInputException
+     */
     public static ParsedUserInput parse(String userInput) throws InvalidUserInputException {
         FaunaCommand command = FaunaCommand.fromString(getCommandFromUserInput(userInput));
         String inputPattern = command.getCommandRegexPattern();
