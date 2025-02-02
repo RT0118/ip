@@ -20,14 +20,31 @@ public class DeadlineTask extends Task {
         this.by = by;
     }
 
+    /**
+     * <p>Marks the task as done and returns a new instance
+     * that is immutable
+     * </p>
+     * @return immutable Task object
+     */
     public Task markAsDone() {
         return new DeadlineTask(this, true);
     }
 
+    /**
+     * <p>Marks the task as undone and returns a new instance
+     * that is immutable
+     * </p>
+     * @return immutable Task object
+     */
     public Task markAsUndone() {
         return new DeadlineTask(this, false);
     }
 
+    /**
+     * <p>Serializes the task into string format used for saving
+     * </p>
+     * @return string representation of task serialized
+     */
     @Override
     public String serialize() {
         return String.format("D\t%s\t%s\n", super.serialize(), this.by);
