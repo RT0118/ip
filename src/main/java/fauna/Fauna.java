@@ -24,8 +24,6 @@ public class Fauna {
     private static TaskList taskList;
     private static boolean continueChat = true;
 
-
-
     private static void addTodoToTaskList(String taskName) {
         Task task = new ToDoTask(taskName);
         taskList = taskList.addTask(task);
@@ -70,6 +68,11 @@ public class Fauna {
         } catch (TaskListException taskListException) {
             ui.printErrorMessage(taskListException);
         }
+    }
+
+    private static void findTask(String searchTerm) {
+        String searchResults = taskList.findTasksByKeyword(searchTerm);
+        ui.printFindTask(searchResults, searchTerm);
     }
 
     public static void main(String[] args) {
@@ -124,6 +127,11 @@ public class Fauna {
                 case DELETE:
                     taskIndex = parsedInput.getTaskNumber();
                     deleteTask(taskIndex);
+                    break;
+                case FIND:
+                    taskName = parsedInput.getTaskName();
+                    System.out.println("DBG: " + taskName);
+                    findTask(taskName);
                     break;
                 default:
                     ui.printUnknownCommandErrorMessage();

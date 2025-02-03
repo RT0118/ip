@@ -14,6 +14,7 @@ public enum FaunaCommand {
     MARK("Marks a task as done"),
     UNMARK("Marks a task as undone"),
     DELETE("Deletes a task from the list"),
+    FIND("Search for substring in tasks"),
     INVALID("This command does not exist");
 
     private static final String COMMAND = "(?<command>\\w+)";
@@ -52,6 +53,8 @@ public enum FaunaCommand {
             return UNMARK;
         case "delete":
             return DELETE;
+        case "find":
+            return FIND;
         default:
             return INVALID;
         }
@@ -71,7 +74,7 @@ public enum FaunaCommand {
         switch (this) {
         case LIST, BYE:
             return String.format("^%s$", COMMAND);
-        case TODO, MARK, UNMARK, DELETE:
+        case TODO, MARK, UNMARK, DELETE, FIND:
             return String.format("^%s%s$", COMMAND, TASK_NAME_OR_INDEX);
         case DEADLINE:
             return String.format("^%s%s%s$", COMMAND, TASK_NAME_OR_INDEX, TASK_BY_DATE);

@@ -53,6 +53,10 @@ public abstract class Task {
         }
     }
 
+    public boolean keywordInTaskName(String keyword) {
+        return this.taskName.contains(keyword);
+    }
+
     public String toString() {
         return String.format("[%s] %s",
                 this.isDone ? "X" : " ",

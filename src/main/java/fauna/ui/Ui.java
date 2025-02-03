@@ -64,11 +64,11 @@ public class Ui {
     public void listTasksInTaskList(TaskList taskList) {
         if (taskList.isEmpty()) {
             System.out.println("Ooh, you don't have any tasks available!");
-            return;
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            System.out.println(taskList);
         }
 
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(taskList);
         System.out.println(LINE_SEPARATOR);
     }
 
@@ -113,6 +113,22 @@ public class Ui {
     public void printDeleteTask(Task task, int taskListSize) {
         System.out.println("Alright, I've removed the task:\n\t" + task);
         System.out.printf("Now, you have %d tasks in your list.\n", taskListSize);
+        System.out.println(LINE_SEPARATOR);
+    }
+
+    /**
+     * <p>Print the tasks found after searching in TaskList
+     * </p>
+     * @param tasksFound list of tasks found in a numbered list
+     * @param keywords the search term used
+     */
+    public void printFindTask(String tasksFound, String keywords) {
+        if (tasksFound.isBlank()) {
+            System.out.printf("Umm, I couldn't find anything related to '%s'.\n", keywords);
+        } else {
+            System.out.println("Here, I found some matching tasks in your list:");
+            System.out.println(tasksFound);
+        }
         System.out.println(LINE_SEPARATOR);
     }
 
