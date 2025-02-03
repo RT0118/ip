@@ -113,7 +113,7 @@ public class UserInputParser {
             int taskIndex = getIndexFromUserInput(userInput, inputPattern);
             return new ParsedUserInput(command, taskIndex);
         }
-        case TODO: {
+        case TODO, FIND: {
             String taskName = getNameFromUserInput(userInput, inputPattern);
             return new ParsedUserInput(command, taskName);
         }

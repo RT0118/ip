@@ -144,6 +144,27 @@ public class TaskList {
     }
 
     /**
+     * <p>Search for matching substring in a task's name
+     * using specified keywords, and collects results into
+     * a numbered list (index starts from 1)
+     * </p>
+     * @param keyword the substring to search for
+     * @return matching tasks in a numbered list
+     */
+    public String findTasksByKeyword(String keyword) {
+        List<Task> filteredTasks = this.tasks.stream()
+                .filter(task -> task.keywordInTaskName(keyword))
+                .toList();
+
+        StringBuilder filteredTasksString = new StringBuilder();
+        for (Task task : filteredTasks) {
+            filteredTasksString.append(
+                    String.format("%d. %s\n", this.tasks.indexOf(task) + 1, task.toString()));
+        }
+        return filteredTasksString.toString();
+    }
+
+    /**
      * <p>Get the list of tasks as a string in numbered list form
      * </p>
      * @return string representation of the list of tasks

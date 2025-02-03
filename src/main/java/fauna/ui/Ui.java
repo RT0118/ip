@@ -1,13 +1,14 @@
 package fauna.ui;
 
 import fauna.exceptions.FaunaRuntimeException;
+import fauna.parser.FaunaCommand;
 import fauna.task.Task;
 import fauna.task.TaskList;
 
 import java.util.Scanner;
 
 public class Ui {
-    private static final String LINE_SEPARATOR = "____________________________________________________________";
+    private static final String LINE_SEPARATOR = "_________________________________________________________________";
     private static final String CHATBOT_NAME = "Fauna";
     private static final String CHATBOT_LOGO = """
              _____ _   _   _ _   _    _    
@@ -64,11 +65,11 @@ public class Ui {
     public void listTasksInTaskList(TaskList taskList) {
         if (taskList.isEmpty()) {
             System.out.println("Ooh, you don't have any tasks available!");
-            return;
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            System.out.println(taskList);
         }
 
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(taskList);
         System.out.println(LINE_SEPARATOR);
     }
 
@@ -117,6 +118,22 @@ public class Ui {
     }
 
     /**
+     * <p>Print the tasks found after searching in TaskList
+     * </p>
+     * @param tasksFound list of tasks found in a numbered list
+     * @param keywords the search term used
+     */
+    public void printFindTask(String tasksFound, String keywords) {
+        if (tasksFound.isBlank()) {
+            System.out.printf("Umm, I couldn't find anything related to '%s'.\n", keywords);
+        } else {
+            System.out.println("Here, I found some matching tasks in your list:");
+            System.out.println(tasksFound);
+        }
+        System.out.println(LINE_SEPARATOR);
+    }
+
+    /**
      * <p>Print any exceptions/error messages
      * </p>
      * @param exception FaunaRuntimeException caught
@@ -131,5 +148,13 @@ public class Ui {
      */
     public void printUnknownCommandErrorMessage() {
         System.out.println("Uuuu, I don't know what you mean by that :(");
+    }
+
+    public void printAllAvailableCommands() {
+        System.out.println("Here are the available commands:");
+        for (FaunaCommand command : FaunaCommand.values()) {
+            System.out.printf("%s: %s\n", command, command.getDescription());
+        }
+        System.out.println(LINE_SEPARATOR);
     }
 }
