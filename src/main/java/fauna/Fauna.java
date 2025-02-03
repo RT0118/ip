@@ -19,30 +19,39 @@ import fauna.ui.Ui;
  * Fauna contains the main logic for the Fauna chatbot
  */
 public class Fauna {
-    private static final Ui ui = new Ui();
-    private static final String SAVE_FILE_LOCATION = "./fauna.txt";
-    private static TaskList taskList;
-    private static boolean continueChat = true;
+    private final Ui ui;
+    private final Storage storage;
+    private TaskList taskList;
 
-    private static void addTodoToTaskList(String taskName) {
+    /**
+     * Create a new instance of Fauna
+     * @param saveFileLocation txt save file to load tasks from
+     */
+    public Fauna(String saveFileLocation) {
+        this.ui = new Ui();
+        this.storage = new Storage(saveFileLocation);
+        this.taskList = this.storage.restore();
+    }
+
+    private void addTodoToTaskList(String taskName) {
         Task task = new ToDoTask(taskName);
         taskList = taskList.addTask(task);
         ui.printAddTaskPrompt(task, taskList.size());
     }
 
-    private static void addDeadlineToTaskList(String taskName, LocalDateTime datetime) {
+    private void addDeadlineToTaskList(String taskName, LocalDateTime datetime) {
         Task task = new DeadlineTask(taskName, datetime);
         taskList = taskList.addTask(task);
         ui.printAddTaskPrompt(task, taskList.size());
     }
 
-    private static void addEventToTaskList(String taskName, LocalDateTime from, LocalDateTime to) {
+    private void addEventToTaskList(String taskName, LocalDateTime from, LocalDateTime to) {
         Task task = new EventTask(taskName, from, to);
         taskList = taskList.addTask(task);
         ui.printAddTaskPrompt(task, taskList.size());
     }
 
-    private static void markTaskAsDone(int taskIndex) {
+    private void markTaskAsDone(int taskIndex) {
         try {
             taskList = taskList.markTaskAsDone(taskIndex);
             ui.printMarkTaskAsDone(taskList.getTask(taskIndex));
@@ -51,7 +60,7 @@ public class Fauna {
         }
     }
 
-    private static void markTaskAsUndone(int taskIndex) {
+    private void markTaskAsUndone(int taskIndex) {
         try {
             taskList = taskList.markTaskAsUndone(taskIndex);
             ui.printMarkTaskAsUndone(taskList.getTask(taskIndex));
@@ -60,9 +69,9 @@ public class Fauna {
         }
     }
 
-    private static void deleteTask(int taskIndex) {
+    private void deleteTask(int taskIndex) {
         try {
-            Task deletedTask = taskList.getTask(taskIndex);
+            Task deletedTask = this.taskList.getTask(taskIndex);
             taskList = taskList.removeTask(taskIndex);
             ui.printDeleteTask(deletedTask, taskList.size());
         } catch (TaskListException taskListException) {
@@ -70,21 +79,16 @@ public class Fauna {
         }
     }
 
-    private static void findTask(String searchTerm) {
+    private void findTask(String searchTerm) {
         String searchResults = taskList.findTasksByKeyword(searchTerm);
         ui.printFindTask(searchResults, searchTerm);
     }
 
-    public static void main(String[] args) {
-        // startup
-        Storage storage = new Storage(SAVE_FILE_LOCATION);
-        Ui ui = new Ui();
-        taskList = storage.restore();
-
-        // run
+    public void run() {
+        // greet the user
         ui.showWelcomeMessage();
 
-        // chatbot
+        boolean continueChat = true;
         while (continueChat) {
             // get user's input
             String userInput = ui.getUserInput();
@@ -151,5 +155,9 @@ public class Fauna {
         } catch (StorageException storageException) {
             System.out.println(storageException.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        new Fauna("./fauna.txt").run();
     }
 }
