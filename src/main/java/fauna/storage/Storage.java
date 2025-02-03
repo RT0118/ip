@@ -1,14 +1,14 @@
 package fauna.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+import fauna.exceptions.StorageException;
 import fauna.task.Task;
 import fauna.task.TaskList;
-import fauna.exceptions.StorageException;
-
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Storage class to save and restore tasks saved by the user

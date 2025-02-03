@@ -1,10 +1,13 @@
 package fauna.parser;
 
-import fauna.exceptions.InvalidUserInputException;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import fauna.exceptions.InvalidUserInputException;
+
+/**
+ * ParsedUserInput stores the values obtained from the user after parsing
+ */
 public class ParsedUserInput {
     private final FaunaCommand command;
     private final Optional<String> taskName;
@@ -40,7 +43,8 @@ public class ParsedUserInput {
         this.taskNumber = Optional.empty();
     }
 
-    public ParsedUserInput(FaunaCommand command, String taskName, LocalDateTime fromDatetime, LocalDateTime toDatetime) {
+    public ParsedUserInput(FaunaCommand command, String taskName,
+                           LocalDateTime fromDatetime, LocalDateTime toDatetime) {
         this.command = command;
         this.taskName = Optional.of(taskName);
         this.taskByDatetime = Optional.empty();

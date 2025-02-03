@@ -1,13 +1,12 @@
 package fauna.parser;
 
-import fauna.exceptions.InvalidUserInputException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fauna.exceptions.InvalidUserInputException;
 
 /**
  * UserInputParser handles parsing of raw user input with error checking
@@ -110,27 +109,27 @@ public class UserInputParser {
         String inputPattern = command.getCommandRegexPattern();
 
         switch (command) {
-            case MARK, UNMARK, DELETE: {
-                int taskIndex = getIndexFromUserInput(userInput, inputPattern);
-                return new ParsedUserInput(command, taskIndex);
-            }
-            case TODO: {
-                String taskName = getNameFromUserInput(userInput, inputPattern);
-                return new ParsedUserInput(command, taskName);
-            }
-            case DEADLINE: {
-                String taskName = getNameFromUserInput(userInput, inputPattern);
-                LocalDateTime by = getByDateFromUserInput(userInput, inputPattern);
-                return new ParsedUserInput(command, taskName, by);
-            }
-            case EVENT: {
-                String taskName = getNameFromUserInput(userInput, inputPattern);
-                LocalDateTime from = getFromDateFromUserInput(userInput, inputPattern);
-                LocalDateTime to = getToDateFromUserInput(userInput, inputPattern);
-                return new ParsedUserInput(command, taskName, from, to);
-            }
-            default:
-                return new ParsedUserInput(command);
+        case MARK, UNMARK, DELETE: {
+            int taskIndex = getIndexFromUserInput(userInput, inputPattern);
+            return new ParsedUserInput(command, taskIndex);
+        }
+        case TODO: {
+            String taskName = getNameFromUserInput(userInput, inputPattern);
+            return new ParsedUserInput(command, taskName);
+        }
+        case DEADLINE: {
+            String taskName = getNameFromUserInput(userInput, inputPattern);
+            LocalDateTime by = getByDateFromUserInput(userInput, inputPattern);
+            return new ParsedUserInput(command, taskName, by);
+        }
+        case EVENT: {
+            String taskName = getNameFromUserInput(userInput, inputPattern);
+            LocalDateTime from = getFromDateFromUserInput(userInput, inputPattern);
+            LocalDateTime to = getToDateFromUserInput(userInput, inputPattern);
+            return new ParsedUserInput(command, taskName, from, to);
+        }
+        default:
+            return new ParsedUserInput(command);
         }
     }
 }

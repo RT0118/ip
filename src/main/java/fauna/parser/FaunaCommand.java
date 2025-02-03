@@ -36,15 +36,24 @@ public enum FaunaCommand {
      */
     public static FaunaCommand fromString(String commandString) {
         switch (commandString) {
-            case "list": return LIST;
-            case "bye": return BYE;
-            case "todo": return TODO;
-            case "deadline": return DEADLINE;
-            case "event": return EVENT;
-            case "mark": return MARK;
-            case "unmark": return UNMARK;
-            case "delete": return DELETE;
-            default: return INVALID;
+        case "list":
+            return LIST;
+        case "bye":
+            return BYE;
+        case "todo":
+            return TODO;
+        case "deadline":
+            return DEADLINE;
+        case "event":
+            return EVENT;
+        case "mark":
+            return MARK;
+        case "unmark":
+            return UNMARK;
+        case "delete":
+            return DELETE;
+        default:
+            return INVALID;
         }
     }
 
@@ -60,15 +69,15 @@ public enum FaunaCommand {
      */
     public String getCommandRegexPattern() {
         switch (this) {
-        case LIST,BYE:
+        case LIST, BYE:
             return String.format("^%s$", COMMAND);
         case TODO, MARK, UNMARK, DELETE:
             return String.format("^%s%s$", COMMAND, TASK_NAME_OR_INDEX);
         case DEADLINE:
             return String.format("^%s%s%s$", COMMAND, TASK_NAME_OR_INDEX, TASK_BY_DATE);
         case EVENT:
-            return String.format("^%s%s%s%s$",
-                COMMAND, TASK_NAME_OR_INDEX, TASK_FROM_DATE, TASK_TO_DATE);
+            return String.format("^%s%s%s%s$", COMMAND, TASK_NAME_OR_INDEX,
+                    TASK_FROM_DATE, TASK_TO_DATE);
         default:
             return ".*";
         }

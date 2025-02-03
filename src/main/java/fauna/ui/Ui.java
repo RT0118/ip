@@ -1,7 +1,6 @@
 package fauna.ui;
 
 import fauna.exceptions.FaunaRuntimeException;
-import fauna.parser.FaunaCommand;
 import fauna.task.Task;
 import fauna.task.TaskList;
 
