@@ -85,5 +85,4 @@ public enum FaunaCommand {
             return ".*";
         }
     }
-
 }

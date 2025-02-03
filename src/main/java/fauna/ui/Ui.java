@@ -153,7 +153,7 @@ public class Ui {
     public void printAllAvailableCommands() {
         System.out.println("Here are the available commands:");
         for (FaunaCommand command : FaunaCommand.values()) {
-            System.out.printf("%s:\t\t%s\n", command, command.getDescription());
+            System.out.printf("%s: %s\n", command, command.getDescription());
         }
         System.out.println(LINE_SEPARATOR);
     }
