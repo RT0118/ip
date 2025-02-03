@@ -1,13 +1,14 @@
 package fauna.ui;
 
 import fauna.exceptions.FaunaRuntimeException;
+import fauna.parser.FaunaCommand;
 import fauna.task.Task;
 import fauna.task.TaskList;
 
 import java.util.Scanner;
 
 public class Ui {
-    private static final String LINE_SEPARATOR = "____________________________________________________________";
+    private static final String LINE_SEPARATOR = "_________________________________________________________________";
     private static final String CHATBOT_NAME = "Fauna";
     private static final String CHATBOT_LOGO = """
              _____ _   _   _ _   _    _    
@@ -147,5 +148,13 @@ public class Ui {
      */
     public void printUnknownCommandErrorMessage() {
         System.out.println("Uuuu, I don't know what you mean by that :(");
+    }
+
+    public void printAllAvailableCommands() {
+        System.out.println("Here are the available commands:");
+        for (FaunaCommand command : FaunaCommand.values()) {
+            System.out.printf("%s:\t\t%s\n", command, command.getDescription());
+        }
+        System.out.println(LINE_SEPARATOR);
     }
 }

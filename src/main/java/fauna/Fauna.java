@@ -134,11 +134,11 @@ public class Fauna {
                     break;
                 case FIND:
                     taskName = parsedInput.getTaskName();
-                    System.out.println("DBG: " + taskName);
                     findTask(taskName);
                     break;
                 default:
                     ui.printUnknownCommandErrorMessage();
+                    ui.printAllAvailableCommands();
                     break;
                 }
             } catch (InvalidUserInputException | TaskListException exception) {
