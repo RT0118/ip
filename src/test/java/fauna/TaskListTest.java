@@ -1,11 +1,12 @@
 package fauna;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import fauna.task.Task;
 import fauna.task.TaskList;
 import fauna.task.ToDoTask;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test

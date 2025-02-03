@@ -1,9 +1,9 @@
 package fauna.task;
 
-import fauna.exceptions.StorageException;
-
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+import fauna.exceptions.StorageException;
 
 public abstract class Task {
     private final String taskName;

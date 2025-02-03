@@ -1,16 +1,17 @@
 package fauna;
 
-import fauna.exceptions.InvalidUserInputException;
-import fauna.parser.FaunaCommand;
-import fauna.parser.ParsedUserInput;
-import fauna.parser.UserInputParser;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import fauna.exceptions.InvalidUserInputException;
+import fauna.parser.FaunaCommand;
+import fauna.parser.ParsedUserInput;
+import fauna.parser.UserInputParser;
 
 public class UserInputParserTest {
     private static final DateTimeFormatter dateTimeFormatter =

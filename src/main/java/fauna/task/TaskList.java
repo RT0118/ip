@@ -1,10 +1,10 @@
 package fauna.task;
 
-import fauna.exceptions.TaskListException;
-
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import fauna.exceptions.TaskListException;
 
 /**
  * TaskList stores Task objects for easy management of

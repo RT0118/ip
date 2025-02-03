@@ -1,21 +1,23 @@
 package fauna;
 
-import fauna.parser.ParsedUserInput;
-import fauna.parser.UserInputParser;
-import fauna.storage.Storage;
-import fauna.task.ToDoTask;
-import fauna.task.DeadlineTask;
-import fauna.task.EventTask;
-import fauna.task.TaskList;
-import fauna.task.Task;
-import fauna.ui.Ui;
+import java.time.LocalDateTime;
+
 import fauna.exceptions.InvalidUserInputException;
 import fauna.exceptions.StorageException;
 import fauna.exceptions.TaskListException;
+import fauna.parser.ParsedUserInput;
+import fauna.parser.UserInputParser;
+import fauna.storage.Storage;
+import fauna.task.DeadlineTask;
+import fauna.task.EventTask;
+import fauna.task.Task;
+import fauna.task.TaskList;
+import fauna.task.ToDoTask;
+import fauna.ui.Ui;
 
-import java.time.LocalDateTime;
-
-
+/**
+ * Fauna contains the main logic for the Fauna chatbot
+ */
 public class Fauna {
     private static final Ui ui = new Ui();
     private static final String SAVE_FILE_LOCATION = "./fauna.txt";
@@ -142,5 +144,4 @@ public class Fauna {
             System.out.println(storageException.getMessage());
         }
     }
-
 }
