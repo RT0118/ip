@@ -1,26 +1,43 @@
 package fauna.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import fauna.exceptions.StorageException;
 
+/**
+ * Task contains the basic implementation and variables of a task
+ */
 public abstract class Task {
-    private final String taskName;
-    private final boolean isDone;
     protected static final DateTimeFormatter
             DATETIME_PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
+    private final String taskName;
+    private final boolean isDone;
 
+    /**
+     * Constructor for new Task
+     * @param taskName name of the task
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for new Task when isDone should be modified
+     * @param taskName name of the task
+     * @param isDone boolean variable representing "is task done?"
+     */
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
     }
 
+    /**
+     * Constructor for new Task using old Task object
+     * @param task previous state of Task to copy over
+     * @param isDone boolean variable representing "is task done?"
+     */
     protected Task(Task task, boolean isDone) {
         this.taskName = task.taskName;
         this.isDone = isDone;

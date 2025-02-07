@@ -1,21 +1,21 @@
 package fauna.ui;
 
+import java.util.Scanner;
+
 import fauna.exceptions.FaunaRuntimeException;
 import fauna.parser.FaunaCommand;
 import fauna.task.Task;
 import fauna.task.TaskList;
 
-import java.util.Scanner;
-
 public class Ui {
     private static final String LINE_SEPARATOR = "_________________________________________________________________";
     private static final String CHATBOT_NAME = "Fauna";
-    private static final String CHATBOT_LOGO = """
-             _____ _   _   _ _   _    _    
-            |  ___/ \\ | | | | \\ | |  / \\   
-            | |_ / _ \\| | | |  \\| | / _ \\  
-            |  _/ ___ \\ |_| | |\\  |/ ___ \\ 
-            |_|/_/   \\_\\___/|_| \\_/_/   \\_\\""";
+    private static final String CHATBOT_LOGO = " _____ _   _   _ _   _    _    "
+            + "\n|  ___/ \\ | | | | \\ | |  / \\   "
+            + "\n| |_ / _ \\| | | |  \\| | / _ \\  "
+            + "\n|  _/ ___ \\ |_| | |\\  |/ ___ \\ "
+            + "\n|_|/_/   \\_\\___/|_| \\_/_/   \\_\\";
+
 
     private final Scanner userInputScanner;
 
