@@ -6,7 +6,8 @@ import java.util.Optional;
 import fauna.exceptions.InvalidUserInputException;
 
 /**
- * ParsedUserInput stores the values obtained from the user after parsing
+ * ParsedUserInput stores the values obtained from the user after parsing,
+ * querying for values not parsed returns a string
  */
 public class ParsedUserInput {
     private final FaunaCommand command;
@@ -16,6 +17,10 @@ public class ParsedUserInput {
     private final Optional<LocalDateTime> taskToDatetime;
     private final Optional<Integer> taskNumber;
 
+    /**
+     * Constructor for ParsedUserInput
+     * @param command FaunaCommand representing the command requested by user
+     */
     public ParsedUserInput(FaunaCommand command) {
         this.command = command;
         this.taskName = Optional.empty();
@@ -25,6 +30,11 @@ public class ParsedUserInput {
         this.taskNumber = Optional.empty();
     }
 
+    /**
+     * Constructor for ParsedUserInput
+     * @param command FaunaCommand representing the command requested by user
+     * @param taskName name of task
+     */
     public ParsedUserInput(FaunaCommand command, String taskName) {
         this.command = command;
         this.taskName = Optional.of(taskName);
@@ -34,6 +44,12 @@ public class ParsedUserInput {
         this.taskNumber = Optional.empty();
     }
 
+    /**
+     * Constructor for ParsedUserInput
+     * @param command FaunaCommand representing the command requested by user
+     * @param taskName name of task
+     * @param byDatetime /by datetime
+     */
     public ParsedUserInput(FaunaCommand command, String taskName, LocalDateTime byDatetime) {
         this.command = command;
         this.taskName = Optional.of(taskName);

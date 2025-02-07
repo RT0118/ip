@@ -84,6 +84,9 @@ public class Fauna {
         ui.printFindTask(searchResults, searchTerm);
     }
 
+    /**
+     * Begin the execution of Fauna chatbot
+     */
     public void run() {
         // greet the user
         ui.showWelcomeMessage();
