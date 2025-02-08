@@ -7,9 +7,11 @@ import fauna.parser.FaunaCommand;
 import fauna.task.Task;
 import fauna.task.TaskList;
 
+/**
+ * Ui returns the messages and chatbot responses to display depending on action performed
+ */
 public class Ui {
     private static final String LINE_SEPARATOR = "_________________________________________________________________";
-    private static final String CHATBOT_NAME = "Fauna";
     private static final String CHATBOT_LOGO = " _____ _   _   _ _   _    _    "
             + "\n|  ___/ \\ | | | | \\ | |  / \\   "
             + "\n| |_ / _ \\| | | |  \\| | / _ \\  "
@@ -24,30 +26,35 @@ public class Ui {
     }
 
     /**
+     * <p>Print the logo for startup
+     * </p>
+     * @return Fauna logo
+     */
+    public String displayLogo() {
+        return "Hello from\n" + CHATBOT_LOGO + "\n" + LINE_SEPARATOR;
+    }
+
+    /**
      * <p>Print the welcome message on startup
      * </p>
      */
-    public void showWelcomeMessage() {
-        System.out.println("Hello from\n" + CHATBOT_LOGO + "\n");
-
-        // greet the user
-        System.out.println(LINE_SEPARATOR);
-        System.out.println("Hello hello! I'm " + CHATBOT_NAME);
-        System.out.println("What can I do for you?");
-        System.out.println(LINE_SEPARATOR + "\n");
+    public String showWelcomeMessage() {
+        return "Konfauna~ this is your chatbot kirin Fauna here!" + "\n"
+                + "What would you like me to do?" + "\n"
+                + LINE_SEPARATOR;
     }
 
     /**
      * <p>Print the goodbye message when exiting
      * </p>
      */
-    public void showGoodbyeMessage() {
-        System.out.println("Faunwell! Hope to see you again soon!");
-        System.out.println(LINE_SEPARATOR);
+    public String showGoodbyeMessage() {
+        return "Faunwell! Hope to see you again soon!" + "\n"
+                + LINE_SEPARATOR;
     }
 
     /**
-     * <p>Obtain user input from Scanner
+     * <p>Obtain user input from Scanner (for console only)
      * </p>
      * @return raw user input
      */
@@ -61,16 +68,18 @@ public class Ui {
      * <p>Print the list of tasks saved in a TaskList object
      * </p>
      * @param taskList TaskList object
+     * @return Fauna's response
      */
-    public void listTasksInTaskList(TaskList taskList) {
+    public String listTasksInTaskList(TaskList taskList) {
+        String response = "";
         if (taskList.isEmpty()) {
-            System.out.println("Ooh, you don't have any tasks available!");
+            response += "Ooh, you don't have any tasks available!\n";
         } else {
-            System.out.println("Here are the tasks in your list:");
-            System.out.println(taskList);
+            response += "Here are the tasks in your list:" + "\n";
+            response += taskList;
+            response += "\n";
         }
-
-        System.out.println(LINE_SEPARATOR);
+        return response + LINE_SEPARATOR;
     }
 
     /**
@@ -78,31 +87,34 @@ public class Ui {
      * </p>
      * @param task the Task object added
      * @param taskListSize the size of TaskList after add
+     * @return Fauna's response
      */
-    public void printAddTaskPrompt(Task task, int taskListSize) {
-        System.out.println("Got it. I've added the task:\n\t" + task);
-        System.out.printf("Now, you have %d tasks in your list.\n", taskListSize);
-        System.out.println(LINE_SEPARATOR);
+    public String printAddTaskPrompt(Task task, int taskListSize) {
+        return "Got it. I've added the task:\n\t" + task + "\n"
+                + String.format("Now, you have %d tasks in your list.\n", taskListSize)
+                + LINE_SEPARATOR;
     }
 
     /**
      * <p>Print the task marked as done
      * </p>
      * @param task the Task object modified
+     * @return Fauna's response
      */
-    public void printMarkTaskAsDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n\t" + task);
-        System.out.println(LINE_SEPARATOR);
+    public String printMarkTaskAsDone(Task task) {
+        return "Nice! I've marked this task as done:\n\t" + task + "\n"
+            + LINE_SEPARATOR;
     }
 
     /**
      * <p>Print the task marked as undone
      * </p>
      * @param task the Task object modified
+     * @return Fauna's response
      */
-    public void printMarkTaskAsUndone(Task task) {
-        System.out.println("Okay, I've marked this task as undone:\n\t" + task);
-        System.out.println(LINE_SEPARATOR);
+    public String printMarkTaskAsUndone(Task task) {
+        return "Okay, I've marked this task as undone:\n\t" + task + "\n"
+                + LINE_SEPARATOR;
     }
 
     /**
@@ -110,11 +122,12 @@ public class Ui {
      * </p>
      * @param task the Task object removed
      * @param taskListSize the size of TaskList after removal
+     * @return Fauna's response
      */
-    public void printDeleteTask(Task task, int taskListSize) {
-        System.out.println("Alright, I've removed the task:\n\t" + task);
-        System.out.printf("Now, you have %d tasks in your list.\n", taskListSize);
-        System.out.println(LINE_SEPARATOR);
+    public String printDeleteTask(Task task, int taskListSize) {
+        return "Alright, I've removed the task:\n\t" + task + "\n"
+                + String.format("Now, you have %d tasks in your list.\n", taskListSize)
+                + LINE_SEPARATOR;
     }
 
     /**
@@ -122,39 +135,49 @@ public class Ui {
      * </p>
      * @param tasksFound list of tasks found in a numbered list
      * @param keywords the search term used
+     * @return Fauna's response
      */
-    public void printFindTask(String tasksFound, String keywords) {
+    public String printFindTask(String tasksFound, String keywords) {
+        String response = "";
         if (tasksFound.isBlank()) {
-            System.out.printf("Umm, I couldn't find anything related to '%s'.\n", keywords);
+            response += String.format("Umm, I couldn't find anything related to '%s'.\n", keywords);
         } else {
-            System.out.println("Here, I found some matching tasks in your list:");
-            System.out.println(tasksFound);
+            response += "Here, I found some matching tasks in your list:\n";
+            response += tasksFound;
+            response += "\n";
         }
-        System.out.println(LINE_SEPARATOR);
+        return response + LINE_SEPARATOR;
     }
 
     /**
      * <p>Print any exceptions/error messages
      * </p>
      * @param exception FaunaRuntimeException caught
+     * @return Fauna's response
      */
-    public void printErrorMessage(FaunaRuntimeException exception) {
-        System.out.println(exception.getMessage());
+    public String printErrorMessage(FaunaRuntimeException exception) {
+        return exception.getMessage();
     }
 
     /**
      * <p>Print an error message when an unknown command is provided
      * </p>
+     * @return Fauna's response
      */
-    public void printUnknownCommandErrorMessage() {
-        System.out.println("Uuuu, I don't know what you mean by that :(");
+    public String printUnknownCommandErrorMessage() {
+        return "Uuuu, I don't know what you mean by that :(";
     }
 
-    public void printAllAvailableCommands() {
-        System.out.println("Here are the available commands:");
+    /**
+     * <p>Print all available Fauna commands with description
+     * </p>
+     * @return Fauna's response
+     */
+    public String printAllAvailableCommands() {
+        StringBuilder response = new StringBuilder("Here are the available commands:\n");
         for (FaunaCommand command : FaunaCommand.values()) {
-            System.out.printf("%s: %s\n", command, command.getDescription());
+            response.append(String.format("%s: %s\n", command, command.getDescription()));
         }
-        System.out.println(LINE_SEPARATOR);
+        return response + LINE_SEPARATOR;
     }
 }
