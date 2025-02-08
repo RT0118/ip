@@ -43,13 +43,27 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Abstract method for marking task as done
+     * @return modified task
+     */
     public abstract Task markAsDone();
+
+    /**
+     * Abstract method for marking task as undone
+     * @return modified task
+     */
     public abstract Task markAsUndone();
 
     public String serialize() {
         return String.format("%s\t%s", this.taskName, this.isDone);
     }
 
+    /**
+     * Converts serialized task string to Task object
+     * @param serializedTask output from calling serialize()
+     * @return Task object after deserialization
+     */
     public static Task fromSerializedString(String serializedTask) {
         String[] splitString = serializedTask.split("\t");
         String taskType = splitString[0];
@@ -70,10 +84,19 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Lookup keywords within task name
+     * @param keyword words to look for
+     * @return boolean value if words are contained in task name
+     */
     public boolean keywordInTaskName(String keyword) {
         return this.taskName.contains(keyword);
     }
 
+    /**
+     * Display the task as a string
+     * @return task as String object
+     */
     public String toString() {
         return String.format("[%s] %s",
                 this.isDone ? "X" : " ",

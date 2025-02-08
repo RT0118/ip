@@ -59,6 +59,13 @@ public class ParsedUserInput {
         this.taskNumber = Optional.empty();
     }
 
+    /**
+     * Constructor for ParsedUserInput
+     * @param command FaunaCommand representing the command requested by user
+     * @param taskName name of task
+     * @param fromDatetime /from datetime
+     * @param toDatetime /to datetime
+     */
     public ParsedUserInput(FaunaCommand command, String taskName,
                            LocalDateTime fromDatetime, LocalDateTime toDatetime) {
         this.command = command;
@@ -69,6 +76,11 @@ public class ParsedUserInput {
         this.taskNumber = Optional.empty();
     }
 
+    /**
+     * Constructor for ParsedUserInput
+     * @param command FaunaCommand representing the command requested by user
+     * @param taskNumber task's index in tasklist
+     */
     public ParsedUserInput(FaunaCommand command, Integer taskNumber) {
         this.command = command;
         this.taskName = Optional.empty();
