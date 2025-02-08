@@ -44,7 +44,8 @@ test {
 }
 
 application {
-    mainClass.set("fauna.Fauna")
+    mainClass.set("fauna.gui.Launcher")
+    //mainClass.set("fauna.ui.Fauna")
 }
 
 shadowJar {
@@ -52,11 +53,10 @@ shadowJar {
     archiveClassifier = "release"
 }
 
-run{
+run {
     standardInput = System.in
 }
 
 checkstyle {
     toolVersion = '10.2'
 }
-
