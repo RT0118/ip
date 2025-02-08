@@ -2,6 +2,9 @@ package fauna.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an event with a timeframe
+ */
 public class EventTask extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
@@ -12,12 +15,25 @@ public class EventTask extends Task {
         this.to = eventTask.to;
     }
 
+    /**
+     * Constructor for EventTask
+     * @param taskName name of task
+     * @param isDone boolean variable representing "is task done?"
+     * @param from start datetime of event
+     * @param to end datetime of event
+     */
     public EventTask(String taskName, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(taskName, isDone);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Constructor for EventTask
+     * @param taskName name of task
+     * @param from start datetime of event
+     * @param to end datetime of event
+     */
     public EventTask(String taskName, LocalDateTime from, LocalDateTime to) {
         super(taskName);
         this.from = from;
@@ -54,6 +70,10 @@ public class EventTask extends Task {
         return String.format("E\t%s\t%s\t%s\n", super.serialize(), this.from, this.to);
     }
 
+    /**
+     * Display the task as a string
+     * @return task as String object
+     */
     public String toString() {
         return String.format("[E]%s (from: %sH to: %sH)", super.toString(),
                 this.from.format(DATETIME_PRINT_FORMATTER),

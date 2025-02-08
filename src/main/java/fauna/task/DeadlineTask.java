@@ -2,6 +2,9 @@ package fauna.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a deadline with an expiry date
+ */
 public class DeadlineTask extends Task {
     private final LocalDateTime by;
 
@@ -10,11 +13,22 @@ public class DeadlineTask extends Task {
         this.by = deadlineTask.by;
     }
 
+    /**
+     * Constructor for DeadlineTask
+     * @param taskName name of task
+     * @param isDone boolean variable representing "is task done?"
+     * @param by expiry date of task
+     */
     public DeadlineTask(String taskName, boolean isDone, LocalDateTime by) {
         super(taskName, isDone);
         this.by = by;
     }
 
+    /**
+     * Constructor for DeadlineTask
+     * @param taskName name of task
+     * @param by expiry date of task
+     */
     public DeadlineTask(String taskName, LocalDateTime by) {
         super(taskName);
         this.by = by;
@@ -50,6 +64,10 @@ public class DeadlineTask extends Task {
         return String.format("D\t%s\t%s\n", super.serialize(), this.by);
     }
 
+    /**
+     * Display the task as a string
+     * @return task as String object
+     */
     public String toString() {
         return String.format("[D]%s (by: %sH)",
                 super.toString(),
