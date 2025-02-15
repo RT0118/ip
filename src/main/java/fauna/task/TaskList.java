@@ -71,7 +71,7 @@ public class TaskList {
         List<Task> modifiedTaskList = IntStream
                 .range(0, this.tasks.size())
                 .filter(i -> i != trueIndex)
-                .mapToObj(i -> this.tasks.get(i))
+                .mapToObj(j -> this.tasks.get(j))
                 .toList();
         return new TaskList(modifiedTaskList);
     }
