@@ -178,6 +178,8 @@ public class Fauna {
      * Begin the execution of Fauna chatbot (in console mode)
      */
     public void run() {
+        assert(this.taskList != null);
+
         // greet the user
         System.out.println(ui.displayLogo());
         System.out.println(ui.showWelcomeMessage());

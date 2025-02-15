@@ -111,21 +111,25 @@ public class UserInputParser {
         switch (command) {
         case MARK, UNMARK, DELETE: {
             int taskIndex = getIndexFromUserInput(userInput, inputPattern);
+            assert(taskIndex > 0);
             return new ParsedUserInput(command, taskIndex);
         }
         case TODO, FIND: {
             String taskName = getNameFromUserInput(userInput, inputPattern);
+            assert(!taskName.isBlank());
             return new ParsedUserInput(command, taskName);
         }
         case DEADLINE: {
             String taskName = getNameFromUserInput(userInput, inputPattern);
             LocalDateTime by = getByDateFromUserInput(userInput, inputPattern);
+            assert(!taskName.isBlank());
             return new ParsedUserInput(command, taskName, by);
         }
         case EVENT: {
             String taskName = getNameFromUserInput(userInput, inputPattern);
             LocalDateTime from = getFromDateFromUserInput(userInput, inputPattern);
             LocalDateTime to = getToDateFromUserInput(userInput, inputPattern);
+            assert(!taskName.isBlank());
             return new ParsedUserInput(command, taskName, from, to);
         }
         default:
