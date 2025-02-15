@@ -50,11 +50,25 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getFaunaDialogBox(firstMessage, faunaImage));
     }
 
+    private void showChatDialogBoxes(String userInput, String botResponse) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialogBox(userInput, userImage),
+                DialogBox.getFaunaDialogBox(botResponse, faunaImage)
+        );
+    }
+
     private void showExitMessage() {
         dialogContainer.getChildren().add(
                 DialogBox.getFaunaDialogBox(
                         "THIS CHATBOT WILL SELF DESTRUCT IN 3 SECONDS",
                         new Image(this.getClass().getResourceAsStream("/images/bye.png"))));
+    }
+
+    private void performExitSequence() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(event -> Platform.exit());
+        showExitMessage();
+        delay.play();
     }
 
     /**
@@ -65,17 +79,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = this.fauna.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialogBox(input, userImage),
-                DialogBox.getFaunaDialogBox(response, faunaImage)
-        );
+        showChatDialogBoxes(input, response);
 
         if (input.startsWith("bye")) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished(event -> Platform.exit());
-            showExitMessage();
-            delay.play();
+            performExitSequence();
         }
+
         userInput.clear();
     }
 }

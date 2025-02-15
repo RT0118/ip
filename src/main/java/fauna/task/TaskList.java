@@ -143,6 +143,15 @@ public class TaskList {
         return this.tasks;
     }
 
+    private String formatFilteredTasksAsString(List<Task> filteredTasks) {
+        StringBuilder filteredTasksString = new StringBuilder();
+        for (Task task : filteredTasks) {
+            filteredTasksString.append(
+                    String.format("%d. %s\n", this.tasks.indexOf(task) + 1, task.toString()));
+        }
+        return filteredTasksString.toString();
+    }
+
     /**
      * <p>Search for matching substring in a task's name
      * using specified keywords, and collects results into
@@ -155,13 +164,7 @@ public class TaskList {
         List<Task> filteredTasks = this.tasks.stream()
                 .filter(task -> task.keywordInTaskName(keyword))
                 .toList();
-
-        StringBuilder filteredTasksString = new StringBuilder();
-        for (Task task : filteredTasks) {
-            filteredTasksString.append(
-                    String.format("%d. %s\n", this.tasks.indexOf(task) + 1, task.toString()));
-        }
-        return filteredTasksString.toString();
+        return formatFilteredTasksAsString(filteredTasks);
     }
 
     /**
