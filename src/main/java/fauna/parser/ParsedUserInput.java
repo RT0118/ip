@@ -16,6 +16,7 @@ public class ParsedUserInput {
     private final Optional<LocalDateTime> taskFromDatetime;
     private final Optional<LocalDateTime> taskToDatetime;
     private final Optional<Integer> taskNumber;
+    private final Optional<String> taskTag;
 
     /**
      * Constructor for ParsedUserInput
@@ -28,6 +29,7 @@ public class ParsedUserInput {
         this.taskFromDatetime = Optional.empty();
         this.taskToDatetime = Optional.empty();
         this.taskNumber = Optional.empty();
+        this.taskTag = Optional.empty();
     }
 
     /**
@@ -42,6 +44,7 @@ public class ParsedUserInput {
         this.taskFromDatetime = Optional.empty();
         this.taskToDatetime = Optional.empty();
         this.taskNumber = Optional.empty();
+        this.taskTag = Optional.empty();
     }
 
     /**
@@ -57,6 +60,7 @@ public class ParsedUserInput {
         this.taskFromDatetime = Optional.empty();
         this.taskToDatetime = Optional.empty();
         this.taskNumber = Optional.empty();
+        this.taskTag = Optional.empty();
     }
 
     /**
@@ -74,6 +78,7 @@ public class ParsedUserInput {
         this.taskFromDatetime = Optional.of(fromDatetime);
         this.taskToDatetime = Optional.of(toDatetime);
         this.taskNumber = Optional.empty();
+        this.taskTag = Optional.empty();
     }
 
     /**
@@ -88,6 +93,23 @@ public class ParsedUserInput {
         this.taskFromDatetime = Optional.empty();
         this.taskToDatetime = Optional.empty();
         this.taskNumber = Optional.of(taskNumber);
+        this.taskTag = Optional.empty();
+    }
+
+    /**
+     * Constructor for ParsedUserInput
+     * @param command FaunaCommand representing the command requested by user
+     * @param taskNumber task's index in tasklist
+     * @param taskTag task's tag to add
+     */
+    public ParsedUserInput(FaunaCommand command, Integer taskNumber, String taskTag) {
+        this.command = command;
+        this.taskName = Optional.empty();
+        this.taskByDatetime = Optional.empty();
+        this.taskFromDatetime = Optional.empty();
+        this.taskToDatetime = Optional.empty();
+        this.taskNumber = Optional.of(taskNumber);
+        this.taskTag = Optional.of(taskTag);
     }
 
     public FaunaCommand getCommand() {
@@ -115,6 +137,10 @@ public class ParsedUserInput {
 
     public Integer getTaskNumber() {
         return this.taskNumber.orElse(-1);
+    }
+
+    public String getTaskTag() {
+        return this.taskTag.orElse("Tag missing?");
     }
 
 }

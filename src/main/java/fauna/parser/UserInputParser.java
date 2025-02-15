@@ -94,6 +94,14 @@ public class UserInputParser {
         return LocalDateTime.parse(dateTimeString, DATETIME_FORMATTER);
     }
 
+    private static String getTaskTagFromUserInput(String userInput, String inputPattern) {
+        String extracted = regexExtract(userInput, inputPattern, "tag");
+        if (extracted == null || extracted.isBlank()) {
+            throw new InvalidUserInputException("the task's #tag is missing!");
+        }
+        return extracted;
+    }
+
     /**
      * <p>parse method will take in user input and
      * extract the command and task information and
@@ -131,6 +139,12 @@ public class UserInputParser {
             LocalDateTime to = getToDateFromUserInput(userInput, inputPattern);
             assert(!taskName.isBlank());
             return new ParsedUserInput(command, taskName, from, to);
+        }
+        case TAG: {
+            int taskIndex = getIndexFromUserInput(userInput, inputPattern);
+            assert(taskIndex > 0);
+            String taskTag = getTaskTagFromUserInput(userInput, inputPattern);
+            return new ParsedUserInput(command, taskIndex, taskTag);
         }
         default:
             return new ParsedUserInput(command);
