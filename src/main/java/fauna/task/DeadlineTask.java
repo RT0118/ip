@@ -34,6 +34,16 @@ public class DeadlineTask extends Task {
         this.by = by;
     }
 
+    public DeadlineTask(DeadlineTask deadlineTask, String tag) {
+        super(deadlineTask, tag);
+        this.by = deadlineTask.by;
+    }
+
+    public DeadlineTask(String taskName, boolean isDone, String taskTag, LocalDateTime by) {
+        super(taskName, isDone, taskTag);
+        this.by = by;
+    }
+
     /**
      * <p>Marks the task as done and returns a new instance
      * that is immutable
@@ -62,6 +72,11 @@ public class DeadlineTask extends Task {
     @Override
     public String serialize() {
         return String.format("D\t%s\t%s\n", super.serialize(), this.by);
+    }
+
+    public Task addTag(String tag) {
+        String formattedTag = "{#" + tag + "}";
+        return new DeadlineTask(this, formattedTag);
     }
 
     /**

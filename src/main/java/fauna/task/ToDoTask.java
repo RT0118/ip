@@ -16,6 +16,14 @@ public class ToDoTask extends Task {
         super(taskName);
     }
 
+    public ToDoTask(ToDoTask toDoTask, String tag) {
+        super(toDoTask, tag);
+    }
+
+    public ToDoTask(String taskName, boolean isDone, String taskTag) {
+        super(taskName, isDone, taskTag);
+    }
+
     /**
      * <p>Marks the task as done and returns a new instance
      * that is immutable
@@ -44,6 +52,11 @@ public class ToDoTask extends Task {
     @Override
     public String serialize() {
         return String.format("T\t%s\n", super.serialize());
+    }
+
+    public Task addTag(String tag) {
+        String formattedTag = "{#" + tag + "}";
+        return new ToDoTask(this, formattedTag);
     }
 
     public String toString() {

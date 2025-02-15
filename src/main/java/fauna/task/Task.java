@@ -13,6 +13,7 @@ public abstract class Task {
             DATETIME_PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
     private final String taskName;
     private final boolean isDone;
+    private final String tag;
 
     /**
      * Constructor for new Task
@@ -21,6 +22,7 @@ public abstract class Task {
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+        this.tag = "";
     }
 
     /**
@@ -31,6 +33,7 @@ public abstract class Task {
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
+        this.tag = "";
     }
 
     /**
@@ -41,6 +44,24 @@ public abstract class Task {
     protected Task(Task task, boolean isDone) {
         this.taskName = task.taskName;
         this.isDone = isDone;
+        this.tag = task.tag;
+    }
+
+    /**
+     * Constructor for new Task using old task object
+     * @param task previous state of Task to copy over
+     * @param tag tag to add to the task
+     */
+    public Task(Task task, String tag) {
+        this.taskName = task.taskName;
+        this.isDone = task.isDone;
+        this.tag = tag;
+    }
+
+    public Task(String taskName, boolean isDone, String tag) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+        this.tag = tag;
     }
 
     /**
@@ -56,7 +77,8 @@ public abstract class Task {
     public abstract Task markAsUndone();
 
     public String serialize() {
-        return String.format("%s\t%s", this.taskName, this.isDone);
+        return String.format("%s\t%s\t%s", this.taskName, this.isDone,
+                !this.tag.isBlank() ? this.tag : "{}");
     }
 
     /**
@@ -69,18 +91,19 @@ public abstract class Task {
         String taskType = splitString[0];
         String taskName = splitString[1];
         boolean taskIsDone = splitString[2].equals("true");
+        String taskTag = splitString[3].equals("{}") ? "" : splitString[3];
         switch(taskType) {
         case "T":
-            return new ToDoTask(taskName, taskIsDone);
+            return new ToDoTask(taskName, taskIsDone, taskTag);
         case "D":
-            LocalDateTime by = LocalDateTime.parse(splitString[3]);
-            return new DeadlineTask(taskName, taskIsDone, by);
+            LocalDateTime by = LocalDateTime.parse(splitString[4]);
+            return new DeadlineTask(taskName, taskIsDone, taskTag, by);
         case "E":
-            LocalDateTime from = LocalDateTime.parse(splitString[3]);
-            LocalDateTime to = LocalDateTime.parse(splitString[4]);
-            return new EventTask(taskName, taskIsDone, from, to);
+            LocalDateTime from = LocalDateTime.parse(splitString[4]);
+            LocalDateTime to = LocalDateTime.parse(splitString[5]);
+            return new EventTask(taskName, taskIsDone, taskTag, from, to);
         default:
-            throw new StorageException("the task string is invalid!");
+            throw new StorageException("the task is invalid!");
         }
     }
 
@@ -93,14 +116,17 @@ public abstract class Task {
         return this.taskName.contains(keyword);
     }
 
+    public abstract Task addTag(String tag);
+
     /**
      * Display the task as a string
      * @return task as String object
      */
     public String toString() {
-        return String.format("[%s] %s",
+        return String.format("[%s] %s %s",
                 this.isDone ? "X" : " ",
-                this.taskName);
+                this.taskName,
+                this.tag);
     }
 
 }
