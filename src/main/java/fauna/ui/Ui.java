@@ -149,6 +149,12 @@ public class Ui {
         return response + LINE_SEPARATOR;
     }
 
+    public String printTaskTagged(Task task) {
+        return "Alright, I've added a tag for the task:\n\t" + task + "\n"
+                + LINE_SEPARATOR;
+
+    }
+
     /**
      * <p>Print any exceptions/error messages
      * </p>
