@@ -167,6 +167,25 @@ public class TaskList {
         return formatFilteredTasksAsString(filteredTasks);
     }
 
+    public TaskList tagTask(int index, String tag) {
+        int trueIndex = index - 1;
+        if (isTaskListIndexInvalid(trueIndex)) {
+            throw new TaskListException(
+                    String.format("task %d does not exist!", index));
+        }
+
+        List<Task> modifiedTaskList = IntStream
+                .range(0, this.tasks.size())
+                .mapToObj(i -> {
+                    if (i == trueIndex) {
+                        return this.tasks.get(i).addTag(tag);
+                    }
+                    return this.tasks.get(i);
+                }).toList();
+        return new TaskList(modifiedTaskList);
+
+    }
+
     /**
      * <p>Get the list of tasks as a string in numbered list form
      * </p>

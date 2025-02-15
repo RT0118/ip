@@ -90,6 +90,15 @@ public class Fauna {
         return ui.printFindTask(searchResults, searchTerm);
     }
 
+    private String tagTask(int taskIndex, String tag) {
+        try {
+            taskList = taskList.tagTask(taskIndex, tag);
+            return ui.printTaskTagged(taskList.getTask(taskIndex));
+        } catch (TaskListException taskListException) {
+            return ui.printErrorMessage(taskListException);
+        }
+    }
+
     private String handleExecution(ParsedUserInput parsedInput) {
         String response = "";
         try {
@@ -133,6 +142,11 @@ public class Fauna {
             case FIND:
                 taskName = parsedInput.getTaskName();
                 response = findTask(taskName);
+                break;
+            case TAG:
+                taskIndex = parsedInput.getTaskNumber();
+                String tag = parsedInput.getTaskTag();
+                response += tagTask(taskIndex, tag);
                 break;
             default:
                 response = ui.printUnknownCommandErrorMessage() + "\n";

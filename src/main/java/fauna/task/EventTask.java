@@ -2,6 +2,8 @@ package fauna.task;
 
 import java.time.LocalDateTime;
 
+import jdk.jfr.Event;
+
 /**
  * Represents an event with a timeframe
  */
@@ -40,6 +42,18 @@ public class EventTask extends Task {
         this.to = to;
     }
 
+    public EventTask(EventTask eventTask, String tag) {
+        super(eventTask, tag);
+        this.from = eventTask.from;
+        this.to = eventTask.to;
+    }
+
+    public EventTask(String taskName, boolean taskIsDone, String taskTag, LocalDateTime from, LocalDateTime to) {
+        super(taskName, taskIsDone, taskTag);
+        this.from = from;
+        this.to = to;
+    }
+
     /**
      * <p>Marks the task as done and returns a new instance
      * that is immutable
@@ -68,6 +82,11 @@ public class EventTask extends Task {
     @Override
     public String serialize() {
         return String.format("E\t%s\t%s\t%s\n", super.serialize(), this.from, this.to);
+    }
+
+    public Task addTag(String tag) {
+        String formattedTag = "{#" + tag + "}";
+        return new EventTask(this, formattedTag);
     }
 
     /**

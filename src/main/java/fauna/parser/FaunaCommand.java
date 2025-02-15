@@ -15,6 +15,7 @@ public enum FaunaCommand {
     UNMARK("Marks a task as undone"),
     DELETE("Deletes a task from the list"),
     FIND("Search for substring in tasks"),
+    TAG("Add a custom tag to tasks"),
     INVALID("This command does not exist");
 
     private static final String COMMAND = "(?<command>\\w+)";
@@ -22,6 +23,7 @@ public enum FaunaCommand {
     private static final String TASK_BY_DATE = "(?:\\s+/by\\s+(?<byDate>.+))?";
     private static final String TASK_FROM_DATE = "(?:\\s+/from\\s+(?<fromDate>.+?)";
     private static final String TASK_TO_DATE = "(?:\\s+/to\\s+(?<toDate>.+))?)?";
+    private static final String TASK_TAG = "(?:\\s+(?<tag>.+?))?";
     private final String description;
 
 
@@ -55,6 +57,8 @@ public enum FaunaCommand {
             return DELETE;
         case "find":
             return FIND;
+        case "tag":
+            return TAG;
         default:
             return INVALID;
         }
@@ -81,6 +85,8 @@ public enum FaunaCommand {
         case EVENT:
             return String.format("^%s%s%s%s$", COMMAND, TASK_NAME_OR_INDEX,
                     TASK_FROM_DATE, TASK_TO_DATE);
+        case TAG:
+            return String.format("^%s%s%s$", COMMAND, TASK_NAME_OR_INDEX, TASK_TAG);
         default:
             return ".*";
         }
