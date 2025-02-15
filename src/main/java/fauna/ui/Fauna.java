@@ -33,6 +33,12 @@ public class Fauna {
         this.taskList = this.storage.restore();
     }
 
+    private void cliModeShowWelcomeMessage() {
+        System.out.println(ui.displayLogo());
+        System.out.println(ui.showWelcomeMessage());
+
+    }
+
     private String addTodoToTaskList(String taskName) {
         Task task = new ToDoTask(taskName);
         taskList = taskList.addTask(task);
@@ -178,9 +184,7 @@ public class Fauna {
      * Begin the execution of Fauna chatbot (in console mode)
      */
     public void run() {
-        // greet the user
-        System.out.println(ui.displayLogo());
-        System.out.println(ui.showWelcomeMessage());
+        cliModeShowWelcomeMessage();
 
         boolean continueChat = true;
         while (continueChat) {
