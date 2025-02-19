@@ -50,7 +50,7 @@ application {
 
 shadowJar {
     archiveBaseName = "fauna"
-    archiveVersion = "v1.1"
+    archiveVersion = "v2.0"
 }
 
 run {
