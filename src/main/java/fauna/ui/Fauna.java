@@ -24,7 +24,7 @@ public class Fauna {
     private TaskList taskList;
 
     /**
-     * Create a new instance of Fauna
+     * Constructs a new instance of Fauna
      * @param saveFileLocation txt save file to load tasks from
      */
     public Fauna(String saveFileLocation) {
@@ -161,7 +161,7 @@ public class Fauna {
     }
 
     /**
-     * Save the tasks before exiting
+     * Saves the current tasks to the file before exiting the application.
      */
     public void saveAndCleanup() {
         // save and cleanup
@@ -173,8 +173,8 @@ public class Fauna {
     }
 
     /**
-     * Get the welcome message as a String object (for GUI mode)
-     * @return welcome message string
+     * Returns the welcome message for GUI mode.
+     * @return A string containing the welcome message
      */
     public String getWelcomeMessageForGui() {
         return ui.showWelcomeMessage();
@@ -201,6 +201,7 @@ public class Fauna {
         assert(this.taskList != null);
         cliModeShowWelcomeMessage();
 
+        // Controls whether the chat session continues running
         boolean continueChat = true;
         while (continueChat) {
             String response = "";
